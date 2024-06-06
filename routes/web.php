@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
 
-Route::get('/',  function(){
-    return env('MY_NAME');
+
+Route::get('/app',  function(){
+    return view('home');
 });

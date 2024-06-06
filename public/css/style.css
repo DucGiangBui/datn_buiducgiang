@@ -1,0 +1,162 @@
+html {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: white;
+}
+body {
+  font-family: "Montserrat";
+  width: 100%;
+  background-image: url("../imgs/Group\ 4.png");
+  background-repeat: no-repeat;
+  background-color: #ffffff;
+  background-size: 100%;
+}
+
+/* Header CSS */
+
+.header {
+  height: 60px;
+  width: 100%;
+  background-image: url("../imgs/Group\ 4.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+}
+.header a {
+  color: white;
+  text-decoration: none;
+}
+.header .active {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+}
+.box-content-header {
+  display: flex;
+  width: 1440px;
+  height: 100%;
+  margin: 0 auto;
+}
+.content-header-tab {
+  width: 100%;
+  display: flex;
+}
+.content-header-tab-1 {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.content-header-tab-1 .btn-header-1 {
+  color: white;
+  text-decoration: none;
+  padding: 0 30px;
+}
+.content-header-tab-2 {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.content-header-tab-2 .btn-header-2 {
+  color: white;
+  text-decoration: none;
+  padding-left: 60px;
+  margin: 0;
+}
+.content-header-tab-2 a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content-header-tab-2 i {
+  color: white;
+  font-size: 15px;
+}
+.logo-header {
+  width: 110px;
+  height: auto;
+  padding-right: 30px;
+}
+.content-header-tab-2 .hotline {
+  padding-left: 15px;
+  margin: 0;
+}
+.btn-call-hotline {
+  padding: 10px 15px;
+  border: solid 1px white;
+  border-radius: 10px;
+}
+.btn-call-hotline:hover {
+  border-radius: 10px;
+  background: #e0e0e0;
+  box-shadow: 10px 10px 30px rgba(255, 255, 255, 0.4), -10px -10px 30px rgba(255, 255, 255, 0.4);
+  color: #000000;
+  transition: 0.7s;
+  border: none;
+}
+.btn-call-hotline:hover i {
+  color: black;
+  transition: 0.7s;
+  border: none;
+}
+
+/* End Header CSS */
+
+/* Thuôc tính riêng */
+
+.fw-100 {
+  font-weight: 700;
+}
+.fw-200 {
+  font-weight: 700;
+}
+.fw-300 {
+  font-weight: 700;
+}
+.fw-400 {
+  font-weight: 700;
+}
+.fw-500 {
+  font-weight: 700;
+}
+.fw-600 {
+  font-weight: 700;
+}
+.fw-700 {
+  font-weight: 700;
+}
+.fw-800 {
+  font-weight: 700;
+}
+.fw-900 {
+  font-weight: 700;
+}
+.padd-10 {
+  padding: 10px;
+}
+.padd-20 {
+  padding: 20px;
+}
+.padd-30 {
+  padding: 30px;
+}
+.padd-40 {
+  padding: 40px;
+}
+.padd-50 {
+  padding: 50px;
+}
+.padd-60 {
+  padding: 60px;
+}
+/*End Thuôc tính riêng */
+
+
+
+.footer{
+  bottom: 0;
+}
