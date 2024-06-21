@@ -16,17 +16,15 @@ use App\Http\Controllers\LoginController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('home');
-});
+    return view('client.homes.index');
+})->name('app');
 
-Route::get('/app',  function(){
-    return view('home');
+Route::get('/dashboard',  function(){
+    return view('admin.dashboard.index');
 });
 Route::get('/orders',  function(){
-    return view('orders');
-});
-Route::get('/', [HomeController::class, 'index'])->name('app');
-Route::get('/order', [OrderController::class, 'index'])->name('orders');
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+    return view('client.homes.orders');
+})->name('orders');
+Auth::routes();
+
