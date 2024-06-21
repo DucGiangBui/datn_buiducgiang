@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\LoginController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +23,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
 Route::get('/app',  function(){
     return view('home');
 });
+Route::get('/orders',  function(){
+    return view('orders');
+});
+Route::get('/', [HomeController::class, 'index'])->name('app');
+Route::get('/order', [OrderController::class, 'index'])->name('orders');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
