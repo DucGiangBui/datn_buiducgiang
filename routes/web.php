@@ -21,8 +21,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-Auth::routes();
-
 Route::get('/app',  function(){
     return view('home');
 });
