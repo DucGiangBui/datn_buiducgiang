@@ -2,10 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Models\Role as SpatieRole;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+class Role extends SpatieRole
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'display_name',
+        'group',
+        'guard_name'
+    ];
 }
