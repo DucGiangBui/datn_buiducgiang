@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('tittle', 'Vai trò')
+@section('title', 'Vai trò')
 @section('content')
     <div class="card">
         <h1>
@@ -34,7 +34,13 @@
                             <a href="{{ route('roles.edit',$role->id) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>
                         <td>
-                            <a href="{{ route('roles.destroy',$role->id) }}" class="btn-delete"><i class="fa-solid fa-trash"></i></a>
+                            <form action="{{ route('roles.destroy',$role->id) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button class="bd-none" onclick="confirmDelete()"><i class="fa-solid fa-trash"></i></button>
+
+                            </form>
+
                         </td>
                     </tr>
                 @endforeach
@@ -42,4 +48,12 @@
             {{ $roles->links() }}
         </div>
     </div>
+
+    <script>
+        function confirmDelete() {
+            if (confirm('Bạn có chắc chắn muốn xóa vai trò này không?')) {
+                document.getElementById('delete-role-form').submit();
+            }
+        }
+    </script>
 @endsection

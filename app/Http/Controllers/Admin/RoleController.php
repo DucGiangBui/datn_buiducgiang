@@ -7,6 +7,7 @@ use App\Models\Permisson;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Roles\CreateRoleRequest;
+use App\Http\Requests\Roles\UpdateRoleRequest;
 
 class RoleController extends Controller
 {
@@ -17,7 +18,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::paginate(5);
+        $roles = Role::latest('id')->paginate(5);
         return view('admin.roles.index',compact('roles'));
         // return view('admin.roles.index');
     }
@@ -45,8 +46,15 @@ class RoleController extends Controller
         $dataCreate['guard_name'] = 'web';
         $role = Role::create($dataCreate);
 
-        $role->permissions()->attach($dataCreate['permission_ids']);
-        return to_route('roles.index')->with(['message' => 'Thêm mới vai trò thành công!']);
+
+        if ($role->update($dataCreate)) {
+            if (isset($dataCreate['permission_ids'])) {
+                $role->permissions()->attach($dataCreate['permission_ids']);
+            }
+            return to_route('roles.index')->with(['message' => 'Thêm mới vai trò thành công!']);
+        }
+
+        return back()->withErrors(['message' => 'Cập nhật vai trò thất bại!']);
     }
 
     /**
@@ -81,15 +89,21 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRoleRequest $request, $id)
     {
-        $role = Role::with('permissions')->findOrFail($id);
+        $role = Role::findOrFail($id);
         $dataUpdate = $request->all();
 
-        $role->update($dataUpdate);
+        \Log::info('Data update:', $dataUpdate);
 
-        $role->permissions()->sync($dataUpdate['permission_ids']);
-        return to_route('roles.index')->with(['message' => 'Cập nhật vai trò thành công!']);
+        if ($role->update($dataUpdate)) {
+            if (isset($dataUpdate['permission_idn'])) {
+                $role->permissions()->sync($dataUpdate['permission_idn']);
+            }
+            return to_route('roles.index')->with(['message' => 'Cập nhật vai trò thành công!']);
+        }
+
+        return back()->withErrors(['message' => 'Cập nhật vai trò thất bại!']);
     }
 
     /**
@@ -100,6 +114,9 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+    $role = Role::findOrFail($id);
+    $role->delete();
+
+    return redirect()->route('roles.index')->with(['message' => 'Xoá vai trò thành công!']);
     }
 }

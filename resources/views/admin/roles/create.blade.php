@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('tittle', 'Thêm vai trò')
+@section('title', 'Thêm vai trò')
 @section('content')
     <div class="card">
         <h1>
@@ -43,7 +43,7 @@
                                 <div>
                                     @foreach ($permission as $item)
                                         <div class="form-check">
-                                            <input class="form-check-input" name="permission_ids" type="checkbox"
+                                            <input class="form-check-input" name="permission_ids[]" type="checkbox"
                                                 value="{{ $item->id }}">
                                             <label class="custom-control-label"
                                                 for="customCheck1">{{ $item->display_name }}</label>
