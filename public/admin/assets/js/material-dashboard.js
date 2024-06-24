@@ -874,3 +874,9 @@ if (indicators) {
 
   sections.forEach(onSectionLeavesViewport);
 }
+
+function confirmDelete() {
+    if (confirm('Bạn có chắc chắn muốn xóa vai trò này không?')) {
+        document.getElementById('delete-role-form').submit();
+    }
+}

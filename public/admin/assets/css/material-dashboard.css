@@ -27933,4 +27933,11 @@ pre[class*="language-"] {
   }
 }
 
+.bd-none{
+    border: none;
+    background: none;
+}
+.bd-none:hover{
+    color: var(--bs-link-color);
+}
 /*# sourceMappingURL=dashboard-free.css.map */

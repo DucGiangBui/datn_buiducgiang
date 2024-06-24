@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8" />
@@ -22,7 +22,8 @@
     <link rel="shortcut icon" href="{{ asset('client/assets/imgs/fanvicon.png') }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('client/assets/imgs/fanvicon.png') }}" type="image/x-icon">
     @vite(['resources/js/app.js', 'resources/css/app.css'])
-</head>
+
+    </head>
 
 <body>
     <header class="header">
@@ -76,7 +77,7 @@
     <main class="web-main">
         @yield('content')
     </main>
-    <footer class="footer {{ Request::is('login') ? 'absolute-footer' : '' }}">
+    <footer class="footer">
         <div class="footer-main">
             <section class="footer-content1 width-30">
                 <div class="content1-main">
@@ -147,6 +148,7 @@
             </section>
         </div>
     </footer>
+
     <script src="{{ asset('client/assets/js/script.js') }}"></script>
 </body>
 

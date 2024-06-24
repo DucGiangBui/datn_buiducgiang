@@ -1,28 +1,20 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    @yield('tittle', 'ONETAP')
+    @yield('title', 'ONETAP')
   </title>
   <link rel="shortcut icon" href="{{ asset('client/assets/imgs/fanvicon.png') }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('client/assets/imgs/fanvicon.png') }}" type="image/x-icon">
   @vite(['resources/js/app.js', 'resources/css/app.css'])
-  <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-  <!-- Nucleo Icons -->
-  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-{{-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> --}}
-  <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-  <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('admin/assets/css/material-dashboard.css?v=3.1.0')}}" rel="stylesheet" />
-  <!-- Nepcha Analytics (nepcha.com) -->
-  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 </head>
 
@@ -155,6 +147,7 @@
       <div class="row">
         @yield('content')
       </div>
+      @if (request()->is('dashboard'))
       <div class="row mt-4">
         <div class="col-lg-4 col-md-6 mt-4 mb-4">
           <div class="card z-index-2 ">
@@ -562,6 +555,7 @@
           </div>
         </div>
       </div>
+      @endif
       <footer class="footer py-4  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
@@ -936,6 +930,7 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{ asset('admin/assets/js/material-dashboard.min.js?v=3.1.0')}}"></script>
+
 </body>
 
 </html>

@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 
 
 /*
@@ -29,3 +30,5 @@ Route::get('/orders',  function(){
 Auth::routes();
 
 Route::resource('roles',RoleController::class);
+Route::resource('users',UserController::class);
+
