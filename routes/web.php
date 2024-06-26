@@ -6,18 +6,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Guest\GuestController;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 Route::get('/', function () {
     return view('client.homes.index');
 })->name('app');
@@ -27,8 +17,12 @@ Route::get('/dashboard',  function(){
 Route::get('/orders',  function(){
     return view('client.homes.orders');
 })->name('orders');
+Route::get('/infos',  function(){
+    return view('guest.index');
+})->name('infos');
 Auth::routes();
 
 Route::resource('roles',RoleController::class);
 Route::resource('users',UserController::class);
+Route::get('/guest', [GuestController::class, 'index'])->name('guest.home');
 

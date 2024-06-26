@@ -41,12 +41,21 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
+
         $dataCreate = $request->all();
+
+        if (User::where('email', $dataCreate['email'])->exists()) {
+            return back()->withErrors(['email' => 'Email đã tồn tại trong hệ thống.'])->withInput();
+        }
+        if (User::where('link_url', $dataCreate['link_url'])->exists()) {
+            return back()->withErrors(['email' => 'Email đã tồn tại trong hệ thống.'])->withInput();
+        }
+
         $dataCreate['password'] = Hash::make($request->password);
         $user = User::create($dataCreate);
 
 
-        if ($user->create($dataCreate)) {
+        if ($user) {
             return to_route('users.index')->with(['message' => 'Thêm mới vai trò thành công!']);
         }
         return back()->withErrors(['message' => 'Them vai trò thất bại!']);
@@ -88,6 +97,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $dataUpdate = $request->all();
 
+
         if ($user->update($dataUpdate)) {
             return to_route('users.index')->with(['message' => 'Cập nhật người dùng thành công!']);
         }
@@ -106,6 +116,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('users.index')->with(['message' => 'Xoá vai trò thành công!']);
+        return redirect()->route('users.index')->with(['message' => 'Xoá người dùng thành công!']);
     }
 }

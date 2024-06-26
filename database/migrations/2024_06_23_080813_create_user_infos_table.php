@@ -10,13 +10,15 @@ class CreateUserInfosTable extends Migration
     {
         Schema::create('user_infos', function (Blueprint $table) {
             $table->id('info_id');
-            $table->unsignedBigInteger('social_id')->nullable();
-            $table->string('position')->nullable();
-            $table->string('company')->nullable();
-            $table->string('address')->nullable();
-            $table->string('avatar_url')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->string('position');
+            $table->string('company');
+            $table->string('address');
+            $table->string('avatar_url');
+            $table->timestamps();
 
-            $table->foreign('social_id')->references('social_id')->on('social_infos')->onDelete('cascade');
+            // Foreign key constraints
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
         });
     }
 
