@@ -14,6 +14,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->tinyInteger('gender');
+            $table->string('link_url');
             $table->unsignedBigInteger('card_id')->nullable();
             $table->unsignedBigInteger('info_id');
 

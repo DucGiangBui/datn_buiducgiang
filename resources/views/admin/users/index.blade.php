@@ -21,6 +21,7 @@
                     <th>Tên</th>
                     <th>Email</th>
                     <th>Giới tính</th>
+                    <th>URL</th>
                     <th>Cập nhật</th>
                     <th>Xoá</th>
                 </tr>
@@ -38,6 +39,7 @@
                                 Không xác định
                             @endif
                         </td>
+                        <td>{{ $user->link_url }}</td>
                         <td>
                             <a href="{{ route('users.edit', $user->user_id) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>

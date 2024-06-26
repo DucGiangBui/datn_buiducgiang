@@ -24,9 +24,29 @@ class User extends Authenticatable
         'password',
         'name',
         'email',
-        'gender'
+        'gender',
     ];
 
+    use HasFactory;
+
+    // Định nghĩa mối quan hệ với UserInfo
+    public function userInfo()
+    {
+        return $this->hasOne(UserInfo::class, 'user_id', 'user_id');
+    }
+
+    // Định nghĩa mối quan hệ với SocialInfo
+    public function socialInfos()
+    {
+        return $this->belongsToMany(SocialInfo::class, 'user_social_infos', 'user_id', 'social_id')
+                    ->withPivot('social_url');
+    }
+
+    // Định nghĩa mối quan hệ với UserSocialInfo
+    public function userSocialInfos()
+    {
+        return $this->hasMany(UserSocialInfo::class, 'user_id', 'user_id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
