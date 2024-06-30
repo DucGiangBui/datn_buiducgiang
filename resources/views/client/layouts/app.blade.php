@@ -30,14 +30,14 @@
         <div class="box-content-header">
             <div class="content-header-tab">
                 <div class="content-header-tab-1">
-                    <a href="{{ route('app') }}"><img class="logo-header" src="{{ asset('client/assets/imgs/LOGO.png') }}" /></a>
+                    <a href="{{ route('homepage') }}"><img class="logo-header" src="{{ asset('client/assets/imgs/LOGO.png') }}" /></a>
                     <!-- resources/views/layouts/app.blade.php -->
 
                     @unless (request()->is('login'))
                         <nav class="list-page">
                             <ul>
                                 <li>
-                                    <a href="{{ route('app') }}"
+                                    <a href="{{ route('homepage') }}"
                                         class="btn-header-1 {{ Request::is('/') ? 'active' : '' }} link-line">GIỚI
                                         THIỆU</a>
                                 </li>
@@ -68,7 +68,7 @@
                         <p class="hotline fw-500">HOTLINE</p>
                     </a>
                     @unless (request()->is('login'))
-                    <a class="btn-header-2 fw-700 link-line" href="#">ĐĂNG NHẬP</a>
+                    <a class="btn-header-2 fw-700 link-line" href="{{ route('login')}}">ĐĂNG NHẬP</a>
                     @endunless
                 </div>
             </div>

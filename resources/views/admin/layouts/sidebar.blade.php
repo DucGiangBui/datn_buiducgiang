@@ -37,6 +37,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link text-white {{ request()->routeIs('socialInfos.*') ?  'active bg-gradient-primary' :''}}" href="{{ route('socialInfos.index') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">receipt_long</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Quản lý Icon $ MXH</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-white " href="../pages/virtual-reality.html">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">view_in_ar</i>
@@ -80,7 +88,7 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Tài khoản</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/profile.html">
+                <a class="nav-link text-white {{ request()->routeIs('myInfos') ? 'active bg-gradient-primary' :''}}" href="{{ route('myInfos') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">person</i>
                     </div>
@@ -88,20 +96,17 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/sign-in.html">
+                <a class="nav-link text-white " href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">login</i>
                     </div>
-                    <span class="nav-link-text ms-1">Đăng nhập</span>
+                    <span class="nav-link-text ms-1">Đăng xuất</span>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/sign-up.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">assignment</i>
-                    </div>
-                    <span class="nav-link-text ms-1">ĐĂng xuất</span>
-                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </li>
         </ul>
     </div>
