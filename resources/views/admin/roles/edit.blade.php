@@ -4,7 +4,7 @@
 <div class="card">
     <h1>Cập nhật vai trò</h1>
     <div>
-        <form action="{{ route('roles.update', $role->id) }}" method="POST">
+        <form action="{{ route('roles.update', $role->role_id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="input-group input-group-static mb-4">
@@ -21,7 +21,7 @@
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="input-group input-group-static mb-4">
+            {{-- <div class="input-group input-group-static mb-4">
                 <label name="group" class="ms-0">Nhóm</label>
                 <select name="group" class="form-control" value="{{ $role->group }}">
                     <option value="system" {{ $role->group == 'system' ? 'selected' : '' }}>System</option>
@@ -32,27 +32,7 @@
                 @error('group')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
-            </div>
-            <div class="form-group">
-                <label for="">Quyền hạn</label>
-                <div class="row">
-                    @foreach ($permissions as $groupName => $permission)
-                        <div class="col-5">
-                            <p class="text-capitalize text-bold m-0">{{ $groupName }}</p>
-                            <div>
-                                @foreach ($permission as $item)
-                                    <div class="form-check">
-                                        <input class="form-check-input" name="permission_idn[]" type="checkbox"
-                                            {{ $role->permissions->contains('name', $item->name) ? 'checked' : '' }}
-                                            value="{{ $item->id }}">
-                                        <label class="custom-control-label" for="customCheck1">{{ $item->display_name }}</label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+            </div> --}}
             <button type="submit" class="btn btn-submit btn-success">Cập nhật</button>
         </form>
     </div>

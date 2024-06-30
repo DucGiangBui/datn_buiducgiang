@@ -30,11 +30,11 @@
         <div class="box-content-header">
             <div class="content-header-tab">
                 <div class="content-header-tab-1">
-                    <a href="{{ route('app') }}"><img class="logo-header" src="{{ asset('client/assets/imgs/LOGO.png') }}" /></a>
+                    <a href="{{ route('homepage') }}"><img class="logo-header" src="{{ asset('client/assets/imgs/LOGO.png') }}" /></a>
                     <nav class="list-page">
                         <ul>
                             <li>
-                                <a href="{{ route('app') }}"
+                                <a href="{{ route('homepage') }}"
                                     class="btn-header-1 {{ Request::is('/') ? 'active' : '' }} link-line">GIỚI
                                     THIỆU</a>
                             </li>

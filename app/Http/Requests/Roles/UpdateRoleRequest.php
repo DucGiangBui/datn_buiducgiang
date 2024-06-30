@@ -26,7 +26,6 @@ class UpdateRoleRequest extends FormRequest
         return [
             'name'=>'required',
             'display_name'=>'required',
-            'group'=>'required',
         ];
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Role;
-use App\Models\Permisson;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Roles\CreateRoleRequest;
@@ -18,7 +17,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::latest('id')->paginate(5);
+        $roles = Role::latest('role_id')->paginate(5);
         return view('admin.roles.index',compact('roles'));
         // return view('admin.roles.index');
     }
@@ -30,8 +29,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permissions = Permisson::all()->groupBy('group');
-        return view('admin.roles.create', compact('permissions'));
+        return view('admin.roles.create');
     }
 
     /**
@@ -43,17 +41,11 @@ class RoleController extends Controller
     public function store(CreateRoleRequest $request)
     {
         $dataCreate = $request->all();
-        $dataCreate['guard_name'] = 'web';
-        $role = Role::create($dataCreate);
+        $roles = Role::create($dataCreate);
 
-
-        if ($role->update($dataCreate)) {
-            if (isset($dataCreate['permission_ids'])) {
-                $role->permissions()->attach($dataCreate['permission_ids']);
-            }
+        if ($roles) {
             return to_route('roles.index')->with(['message' => 'Thêm mới vai trò thành công!']);
         }
-
         return back()->withErrors(['message' => 'Cập nhật vai trò thất bại!']);
     }
 
@@ -63,7 +55,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($role_id)
     {
 
     }
@@ -74,12 +66,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($role_id)
     {
-        $role = Role::with('permissions')->findOrFail($id);
-        $permissions = Permisson::all()->groupBy('group');
-
-        return view('admin.roles.edit', compact('role','permissions'));
+        $role = Role::findOrFail($role_id);
+        return view('admin.roles.edit', compact('role'));
     }
 
     /**
@@ -93,16 +83,11 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $dataUpdate = $request->all();
+        $role->update($dataUpdate);
 
-        \Log::info('Data update:', $dataUpdate);
-
-        if ($role->update($dataUpdate)) {
-            if (isset($dataUpdate['permission_idn'])) {
-                $role->permissions()->sync($dataUpdate['permission_idn']);
-            }
+        if ($role) {
             return to_route('roles.index')->with(['message' => 'Cập nhật vai trò thành công!']);
         }
-
         return back()->withErrors(['message' => 'Cập nhật vai trò thất bại!']);
     }
 
@@ -114,9 +99,12 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-    $role = Role::findOrFail($id);
-    $role->delete();
-
-    return redirect()->route('roles.index')->with(['message' => 'Xoá vai trò thành công!']);
+            $role = Role::findOrFail($id);
+            $role->delete();
+            if($role){
+                return redirect()->route('roles.index')->with('message', 'Xóa vai trò thành công!');
+            }
+            return back()->withErrors(['message' => 'Xóa vai trò không thành công!']);
     }
+
 }

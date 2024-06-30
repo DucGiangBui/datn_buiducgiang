@@ -1,9 +1,9 @@
 @extends('admin.layouts.app')
-@section('title', 'Vai trò')
+@section('title', 'Icon')
 @section('content')
     <div class="card">
         <h1>
-            Danh sách vai trò
+            Danh sách thẻ mẫu
         </h1>
         @if (Session::has('message'))
             <div class="alert alert-success text-black">
@@ -12,42 +12,43 @@
         @endif
 
         <div>
-            <a href="{{ route('roles.create') }}" class="btn btn-primary">Thêm mới</a>
+            <a href="{{ route('templateCards.create') }}" class="btn btn-primary">Thêm mới</a>
         </div>
         <div>
             <table class="table table-hover">
                 <tr>
                     <th>#</th>
-                    <th>Tên</th>
-                    <th>Tên hiển thị</th>
+                    <th>Mẫu thẻ</th>
+                    <th>Mô tả</th>
+                    <th>Đơn giá</th>
                     <th>Chỉnh sửa</th>
                     <th>Xoá</th>
                 </tr>
-                @foreach ($roles as $role)
+                @foreach ($templates as $template)
                     <tr>
-                        <td>{{ $role->role_id }}</td>
-                        <td>{{ $role->name }}</td>
-                        <td>{{ $role->display_name }}</td>
+                        <td>{{ $template->template_id }}</td>
+                        <td><img style="width: 100px;" src="{{ asset($template->template_url) }}" alt="icon" width="50"></td>
+                        <td>{{ $template->description }}</td>
+                        <td>{{ $template->cost }}</td>
                         <td>
-                            <a href="{{ route('roles.edit',$role->role_id) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{{ route('templateCards.edit', $template->template_id) }}"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
                         </td>
                         <td>
-                            <form action="{{ route('roles.destroy',$role->role_id) }}" method="POST">
+                            <form action="{{ route('templateCards.destroy', $template->template_id) }}" method="POST">
                                 @csrf
                                 @method('delete')
                                 <button class="bd-none" onclick="confirmDelete()"><i class="fa-solid fa-trash"></i></button>
                             </form>
                         </td>
-                    </tr>
                 @endforeach
             </table>
-            {{ $roles->links() }}
         </div>
     </div>
 
     <script>
         function confirmDelete() {
-            if (confirm('Bạn có chắc chắn muốn xóa vai trò này không?')) {
+            if (confirm('Bạn có chắc chắn muốn xóa thẻ này không?')) {
                 document.getElementById('delete-role-form').submit();
             }
         }

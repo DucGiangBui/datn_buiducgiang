@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Users\CreateUserRequest;
@@ -18,9 +19,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::latest('user_id')->paginate(5);
-        return view('admin.users.index',compact('users'));
+        $users = User::with('role')->latest('user_id')->paginate(5);
+        return view('admin.users.index', compact('users'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -45,9 +47,6 @@ class UserController extends Controller
         $dataCreate = $request->all();
 
         if (User::where('email', $dataCreate['email'])->exists()) {
-            return back()->withErrors(['email' => 'Email đã tồn tại trong hệ thống.'])->withInput();
-        }
-        if (User::where('link_url', $dataCreate['link_url'])->exists()) {
             return back()->withErrors(['email' => 'Email đã tồn tại trong hệ thống.'])->withInput();
         }
 
@@ -78,11 +77,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($user_id)
     {
-        $user = User::findOrFail($id);
-
-        return view('admin.users.edit', compact('user'));
+        $user = User::with('role')->findOrFail($user_id);
+        $roles = Role::all(); // Lấy tất cả các vai trò
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -92,16 +91,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(UpdateUserRequest $request, $user_id)
     {
-        $user = User::findOrFail($id);
-        $dataUpdate = $request->all();
-
-
-        if ($user->update($dataUpdate)) {
+        $user = User::findOrFail($user_id);
+        $user->update($request->only(['name', 'email', 'gender', 'role_id']));
+        if ($user) {
             return to_route('users.index')->with(['message' => 'Cập nhật người dùng thành công!']);
         }
-
         return back()->withErrors(['message' => 'Cập nhật người dùng thất bại!']);
     }
 

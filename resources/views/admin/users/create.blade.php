@@ -32,13 +32,6 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="input-group input-group-static mb-4">
-                    <label for="">URL</label>
-                    <input name="link_url" value="{{ old('link_url') }}" type="text" class="form-control">
-                    @error('link_url')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
                 <button type="submit" class="btn btn-submit btn-success">Thêm người dùng</button>
             </form>
         </div>
