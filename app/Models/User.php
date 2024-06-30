@@ -6,24 +6,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRole;
+use Spatie\Permission\Traits\HasRoles; // Đúng namespace
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     // use HasRoles;
-    
-    // Khai báo các quan hệ với role và permission
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'role_users', 'user_id', 'role_id');
-    }
 
-    public function permissions()
-    {
-        return $this->roles->map->permissions->flatten()->unique();
-    }
     /**
      * The attributes that are mass assignable.
      *
@@ -36,7 +27,18 @@ class User extends Authenticatable
         'name',
         'email',
         'gender',
+        'role_id',
     ];
+    public function hasRole($roleName)
+    {
+        return $this->role && $this->role->name === $roleName;
+    }
+
+
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'role_id');
+    }
 
     // Định nghĩa mối quan hệ với UserInfo
     public function userInfo()

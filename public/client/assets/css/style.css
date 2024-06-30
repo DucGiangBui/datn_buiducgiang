@@ -1382,3 +1382,14 @@ body {
 #back-to-top-btn:hover {
   background-color: #555;
 }
+.edit-icon
+{
+    position: absolute;
+    top: 0;
+    right: -80px;
+    color:white;
+    font-size: 20px;
+    border: 1px solid white;
+    padding: 13px 15px;
+    border-radius: 50%;
+}

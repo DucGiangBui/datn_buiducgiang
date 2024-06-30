@@ -2,9 +2,7 @@
 @section('title', 'Người dùng')
 @section('content')
     <div class="card">
-        <h1>
-            Danh sách người dùng
-        </h1>
+        <h1>Danh sách người dùng</h1>
         @if (Session::has('message'))
             <div class="alert alert-success text-black">
                 {{ Session::get('message') }}
@@ -12,7 +10,7 @@
         @endif
 
         <div>
-            <a href="{{ route('users.create') }}" class="btn btn-primary">Them moi</a>
+            <a href="{{ route('users.create') }}" class="btn btn-primary">Thêm mới</a>
         </div>
         <div>
             <table class="table table-hover">
@@ -21,7 +19,7 @@
                     <th>Tên</th>
                     <th>Email</th>
                     <th>Giới tính</th>
-                    <th>URL</th>
+                    <th>Vai trò</th>
                     <th>Cập nhật</th>
                     <th>Xoá</th>
                 </tr>
@@ -39,7 +37,7 @@
                                 Không xác định
                             @endif
                         </td>
-                        <td>{{ $user->link_url }}</td>
+                        <td>{{ $user->role ? $user->role->display_name : 'Không xác định' }}</td>
                         <td>
                             <a href="{{ route('users.edit', $user->user_id) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>

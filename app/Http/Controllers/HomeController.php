@@ -13,6 +13,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return to_route('dashboard');
+        return view('admin.dashboard.index');
     }
 }

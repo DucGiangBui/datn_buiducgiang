@@ -17,10 +17,7 @@ class GuestController extends Controller
      */
     public function index()
     {
-        // Giả sử user_id là 1
-        $user = User::with('userInfo', 'socialInfos')->find(30);
-
-
+        $user = User::with('userInfo', 'socialInfos')->find(32);
         return view('guest.index', compact('user'));
     }
 }
