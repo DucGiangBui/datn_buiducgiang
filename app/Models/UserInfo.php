@@ -25,4 +25,10 @@ class UserInfo extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function userInfo()
+    {
+        return $this->hasOne(UserInfo::class, 'user_id');
+    }
+
 }

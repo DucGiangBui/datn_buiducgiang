@@ -32,7 +32,6 @@
                 <div class="content-header-tab-1">
                     <a href="{{ route('homepage') }}"><img class="logo-header" src="{{ asset('client/assets/imgs/LOGO.png') }}" /></a>
                     <!-- resources/views/layouts/app.blade.php -->
-
                     @unless (request()->is('login'))
                         <nav class="list-page">
                             <ul>

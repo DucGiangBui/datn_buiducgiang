@@ -53,7 +53,8 @@
             <div class="cont-scroll">
                 <div class="scroll_infi">
                     <div class="item-scroll">
-                        <img class="item-img" src="{{ asset('client/assets/imgs/male_boy_person_people_avatar_icon_159358.png') }}"
+                        <img class="item-img"
+                            src="{{ asset('client/assets/imgs/male_boy_person_people_avatar_icon_159358.png') }}"
                             alt="" />
                         <h1 class="item-name">Phuong Diep</h1>
                         <div class="item-star">
@@ -70,7 +71,8 @@
                         </p>
                     </div>
                     <div class="item-scroll">
-                        <img class="item-img" src="{{ asset('client/assets/imgs/male_boy_person_people_avatar_icon_159358.png') }}"
+                        <img class="item-img"
+                            src="{{ asset('client/assets/imgs/male_boy_person_people_avatar_icon_159358.png') }}"
                             alt="" />
                         <h1 class="item-name">Xuan Linh</h1>
                         <div class="item-star">
@@ -87,7 +89,8 @@
                         </p>
                     </div>
                     <div class="item-scroll">
-                        <img class="item-img" src="{{ asset('client/assets/imgs/male_boy_person_people_avatar_icon_159358.png') }}"
+                        <img class="item-img"
+                            src="{{ asset('client/assets/imgs/male_boy_person_people_avatar_icon_159358.png') }}"
                             alt="" />
                         <h1 class="item-name">Minh Duc</h1>
                         <div class="item-star">
@@ -104,7 +107,8 @@
                         </p>
                     </div>
                     <div class="item-scroll">
-                        <img class="item-img" src="{{ asset('client/assets/imgs/male_boy_person_people_avatar_icon_159358.png') }}"
+                        <img class="item-img"
+                            src="{{ asset('client/assets/imgs/male_boy_person_people_avatar_icon_159358.png') }}"
                             alt="" />
                         <h1 class="item-name">Duc Giang</h1>
                         <div class="item-star">
@@ -140,66 +144,13 @@
             </div>
             <div class="introduction-select">
                 <ul>
-                    <li class="select-items" data-src="{{ asset('client/assets/imgs/Template1@2x.png') }}">
-                        <div class="sub-items">
-                            <div class="checkbox-wrapper">
-                                <input id="_checkbox-1" type="checkbox" />
-                                <label for="_checkbox-1">
-                                    <div class="tick_mark"></div>
-                                </label>
-                            </div>
-                            <img src="{{ asset('client/assets/imgs/Template1@2x.png') }}" alt="" class="img-item mg-10" />
-                        </div>
-                    </li>
-                    <li class="select-items" data-src="{{ asset('client/assets/imgs/Template2@2x.png') }}">
-                        <div class="sub-items">
-                            <div class="checkbox-wrapper">
-                                <input id="_checkbox-2" type="checkbox" />
-                                <label for="_checkbox-2">
-                                    <div class="tick_mark"></div>
-                                </label>
-                            </div>
-                            <img src="{{ asset('client/assets/imgs/Template2@2x.png') }}" alt="" class="img-item mg-10" />
-                        </div>
-                    </li>
-                    <li class="select-items" data-src="{{ asset('client/assets/imgs/Template3@2x.png') }}">
-                        <div class="sub-items">
-                            <div class="checkbox-wrapper">
-                                <input id="_checkbox-3" type="checkbox" />
-                                <label for="_checkbox-3">
-                                    <div class="tick_mark"></div>
-                                </label>
-                            </div>
-                            <img src="{{ asset('client/assets/imgs/Template3@2x.png') }}" alt="" class="img-item mg-10" />
-                        </div>
-                    </li>
-                    <li class="select-items" data-src="{{ asset('client/assets/imgs/MatTruoc@4x.png') }}">
-                        <div class="sub-items">
-                            <div class="checkbox-wrapper">
-                                <input id="_checkbox-4" type="checkbox" />
-                                <label for="_checkbox-4">
-                                    <div class="tick_mark"></div>
-                                </label>
-                            </div>
-                            <img src="{{ asset('client/assets/imgs/MatTruoc@4x.png') }}" alt="" class="img-item mg-10" />
-                        </div>
-                    </li>
-                    <li class="select-items" data-src="{{ asset('client/assets/imgs/MatSau@4x.png') }}">
-                        <div class="sub-items">
-                            <div class="checkbox-wrapper">
-                                <input id="_checkbox-5" type="checkbox" />
-                                <label for="_checkbox-5">
-                                    <div class="tick_mark"></div>
-                                </label>
-                            </div>
-                            <img src="{{ asset('client/assets/imgs/MatSau@4x.png') }}" alt="" class="img-item mg-10" />
-                        </div>
-                    </li>
+                    @include('client.layouts.loadcard')
                 </ul>
             </div>
             <div class="introduction-5__images w-50per">
                 <div class="credit-card" id="card">
-                    <div class="card-img" id="card-img" style="background-image: url(./assets/imgs/Template1@2x.png)">
+                    <div class="card-img" id="card-img"
+                        style="background-image: url(./assets/imgs/template_cards/Template1@2x.png)">
                         <div class="details-card">
                             <div>
                                 <span id="card-holder-name">Your Name Here</span>

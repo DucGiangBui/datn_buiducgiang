@@ -8,26 +8,17 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Guest\GuestController;
 use App\Http\Controllers\Admin\SocialInfoController;
 use App\Http\Controllers\Admin\TemplateCardController;
+use App\Http\Controllers\Client\TempCardController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Client\ClientController;
 
 
 
-Route::get('/', function () {
-    return view('client.homes.index');
-})->name('homepage');
+Route::get('/', [TempCardController::class, 'index'])->name('homepage');
+Route::get('/orders', [TempCardController::class, 'order_index'])->name('orders');
 
-Route::get('/orders',  function(){
-    return view('client.homes.orders');
-})->name('orders');
 
-Route::get('/infos',  function(){
-    return view('guest.index');
-})->name('infos');
-
-Route::get('/myInfos',  function(){
-    return view('guest.index');
-})->name('myInfos');
+Route::get('/infos/{id}', [GuestController::class, 'index'])->name('user.index')->name('myInfos');
 
 Auth::routes();
 
@@ -81,8 +72,9 @@ Route::middleware(['checklogin'])->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile/index', [ClientController::class, 'index'])->name('profile.index');
     Route::get('/user/{id}', [ClientController::class, 'show'])->name('user.show');
+    Route::get('/profile/create', [ClientController::class, 'createSocial'])->name('profile.create');
     Route::get('/profile/edit', [ClientController::class, 'edit'])->name('profile.edit');
-    Route::post('/profile/update', [ClientController::class, 'update'])->name('profile.update');
+    Route::post('/profile/update', [ClientController::class, 'updateProfile'])->name('profile.update');
     Route::post('/profile/delete', [ClientController::class, 'destroy'])->name('profile.destroy');
     Route::get('/profile/edit/avatar', [ClientController::class, 'editAvatar'])->name('profile.edit.avatar');
     Route::get('/profile/edit/info', [ClientController::class, 'editInfo'])->name('profile.edit.info');
@@ -94,6 +86,4 @@ Route::middleware('auth')->group(function () {
 // Route::resource('socialInfos', SocialInfoController::class);
 // Route::resource('templateCards',TemplateCardController::class);
 
-
-Route::resource('infos',GuestController::class);
 
