@@ -18,15 +18,12 @@ class CheckRole
      */
     public function handle($request, Closure $next, $roleName)
     {
-        if (Auth::check()) {
-            $user = Auth::user();
+        $role = Auth::user()->role;
 
-            $role = Role::find($user->role_id);
-
-            if ($role && $role->name === $roleName) {
-                return $next($request);
-            }
+        if ($role->name === 'admin') {
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('profile.index');
         }
-        return redirect('/');
     }
 }
