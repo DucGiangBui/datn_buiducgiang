@@ -3,24 +3,25 @@
 @section('content')
     <section class="view-info w-1440px">
         <div class="info-item">
-            <form action="{{ route('profile.update.social', $socialInfo->social_id) }}" method="POST">
+            <form action="{{ route('profile.update.social', $usocialInfo->user_social_id) }}" method="POST">
                 @csrf
+
                 <div class="input-group">
-                    <input type="text" id="social_url" name="social_url" class="input-group__input input-txt-5"
-                        value="{{ old('social_url', $socialInfo->pivot->social_url) }}" required />
+                    <input type="text" id="social_url" name="social_url" class="input-group__input input-txt-5 mgt-0"
+                        value="{{ old('social_url', $usocialInfo->social_url) }}" required />
                     <label for="social_url" class="input-group__label input-label-5">Link</label>
                 </div>
                 <div class="form-group">
-                    <label for="social_id">Select Social ID</label>
-                    <select class="input-group__input" name="social_id">
-                        @foreach($allSocialInfos as $info)
-                            <option value="{{ $info->social_id }}"
-                                {{ $info->social_id == $socialInfo->social_id ? 'selected' : '' }}>
-                                {{ $info->platform }}
+                    <label for="social_id">Nền tảng: </label>
+                    <select class="input-group__input input-label-5 btn-wh mgt-0" name="social_id">
+                        @foreach ($allSocialInfos as $asi)
+                            <option value="{{ $asi->social_id }}"
+                                {{ $asi->social_id == $socialInfo->social_id ? 'selected' : '' }}
+                                >
+                                {{ $asi->platform }}
                             </option>
                         @endforeach
                     </select>
-                    <img src="{{ asset($socialInfo->social_icon) }}" alt="icon" width="50" class="mt-2">
                 </div>
                 <button class="buy-home btn-ordes" type="submit">Cập nhật</button>
             </form>

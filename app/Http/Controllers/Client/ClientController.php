@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserInfo;
 use App\Models\SocialInfo;
+use App\Models\UserSocialInfo;
 use App\Models\TemplateCard;
 
 class ClientController extends Controller
@@ -66,14 +67,7 @@ class ClientController extends Controller
 
     // app/Http/Controllers/Client/ClientController.php
 
-    public function createSocial()
-    {
-        $user = Auth::user();
-        $allSocialInfos = SocialInfo::all(); // Lấy tất cả các thông tin xã hội có sẵn
-
-        return view('client.profiles.create-social', compact('user', 'allSocialInfos'));
-    }
-
+    // Phương thức lưu thông tin mạng xã hội mới vào cơ sở dữ liệu
 
     public function editProfile()
     {
@@ -81,25 +75,27 @@ class ClientController extends Controller
         return view('client.profiles.edit-profile', compact('user'));
     }
 
+    public function createSocial()
+    {
+        $allSocialInfos = SocialInfo::all();
+        return view('client.profiles.create-social', compact('allSocialInfos'));
+    }
+
+    // Phương thức lưu thông tin mạng xã hội mới vào cơ sở dữ liệu
     public function storeSocial(Request $request)
     {
-        $user = Auth::user();
-
-        // Xác thực dữ liệu đầu vào
         $request->validate([
             'social_url' => 'required|url',
-            'social_icon' => 'required|string',
-            'social_info_id' => 'required|exists:social_infos,id', // Giả sử bạn cần ID của social info
+            'social_id' => 'required|exists:social_infos,social_id',
         ]);
 
-        // Lưu thông tin xã hội mới
-        $user->socialInfos()->create([
+        $user = Auth::user();
+        $user->socialInfos()->attach($request->input('social_id'), [
             'social_url' => $request->input('social_url'),
-            'social_icon' => $request->input('social_icon'),
-            'social_info_id' => $request->input('social_info_id'),
+            'status' => 1, // hoặc giá trị mặc định khác cho `status`
         ]);
 
-        return redirect()->route('profile.index')->with('success', 'Social link created successfully.');
+        return redirect()->route('profile.index')->with('success', 'Social link added successfully.');
     }
 
     public function updateProfile(Request $request)
@@ -148,31 +144,49 @@ class ClientController extends Controller
 
 
 
-    public function editSocial($id)
+    public function editSocial(Request $request, $id)
     {
+        $extraValue = $request->query('extra');
+
         $user = Auth::user();
-        $socialInfo = $user->socialInfos->find($id);
+        $socialInfo = $user->socialInfos->find($extraValue);
+        $usocialInfo = $user->userSocialInfos->find($id);
         $allSocialInfos = SocialInfo::all();
-        return view('client.profiles.edit-social', compact('user', 'socialInfo', 'allSocialInfos'));
+        $alluSocialInfos = UserSocialInfo::all();
+        return view('client.profiles.edit-social', compact('user', 'socialInfo', 'usocialInfo', 'allSocialInfos', 'alluSocialInfos'));
     }
 
-    public function updateSocial(Request $request, $id)
+    public function updateSocialInfo(Request $request, $id)
     {
         $user = Auth::user();
-        $socialInfo = $user->socialInfos->find($id);
 
-        $socialInfo->pivot->social_url = $request->input('social_url');
-        $socialInfo->social_id = $request->input('social_icon');
-        $socialInfo->pivot->save();
+        $usocialInfo = $user->userSocialInfos()->where('user_social_id', $id)->first();
 
-        return redirect()->route('profile.index')->with('success', 'Social link updated successfully.');
+        if ($usocialInfo) {
+            $usocialInfo->social_url = $request->input('social_url');
+            $usocialInfo->social_id = $request->input('social_id');
+            $usocialInfo->save();
+
+            return redirect()->route('profile.index')->with('success', 'Social link updated successfully.');
+        } else {
+            return redirect()->route('profile.index')->with('error', 'Social link not found.');
+        }
     }
 
-
-    public function destroy()
+    public function destroySocial(Request $request)
     {
         $user = Auth::user();
-        $user->delete();
-        return redirect()->route('home')->with('success', 'Profile deleted successfully.');
+        $userSocialId = $request->input('user_social_id');
+
+        $usocialInfo = $user->userSocialInfos()->where('user_social_id', $userSocialId)->first();
+
+        if ($usocialInfo) {
+            $usocialInfo->delete();
+
+            return redirect()->route('profile.index')->with('success', 'Social link deleted successfully.');
+        } else {
+            return redirect()->route('profile.index')->with('error', 'Social link not found.');
+        }
     }
+
 }

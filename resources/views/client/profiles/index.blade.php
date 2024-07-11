@@ -23,29 +23,43 @@
             </h4>
         </div>
 
-        @if ($user->socialInfos->isNotEmpty())
-            @foreach ($user->socialInfos as $socialInfo)
-                <div class="social-link">
-                    <a href="{{ $socialInfo->pivot->social_url }}" class="icon-button btn-link " target="_blank">
-                        <span class="icon"><img src="{{ asset($socialInfo->social_icon) }}"
-                                alt="{{ $socialInfo->platform }}"></span>
-                        <span class="button-text">{{ $socialInfo->platform }}</span>
-                    </a>
-                    <a href="{{ route('profile.edit.social', $socialInfo->social_id) }}" class="edit-icon buy-home"
-                        title="Edit Social Link">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                </div>
+        @if ($user->userSocialInfos->isNotEmpty())
+            @foreach ($user->userSocialInfos as $userSocialInfo)
+                @php
+                    $socialInfo = $user->socialInfos->where('social_id', $userSocialInfo->social_id)->first();
+                @endphp
+                @if ($socialInfo)
+                    <div class="social-link">
+                        <a href="{{ $userSocialInfo->social_url }}" class="icon-button btn-link" target="_blank">
+                            <span class="icon">
+                                <img src="{{ asset($socialInfo->social_icon) }}" alt="{{ $socialInfo->platform }}">
+                            </span>
+                            <span class="button-text">{{ $socialInfo->platform }}</span>
+                        </a>
+                        <a href="{{ route('profile.edit.social', ['id' => $userSocialInfo->user_social_id]) }}?extra={{ $socialInfo->social_id }}"
+                            class="edit-icon buy-home">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <form action="{{ route('profile.destroy') }}" method="POST" style="display: inline;"
+                            onsubmit="return confirm('Bạn có chắc chắn muốn xóa thông tin này không?');">
+                            @csrf
+                            <input type="hidden" name="user_social_id" value="{{ $userSocialInfo->user_social_id }}">
+                            <button type="submit" class="edit-icon buy-home btn-del-social" style="text-decoration: none">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+
+                    </div>
+                @endif
             @endforeach
         @endif
-        <div class="social-link">
-            <form action="{{ route('profile.create') }}" method="POST" enctype="multipart/form-data">
-                @csrf
 
-            </form>
-            <button style="" class="btn buy-home" type="submit">Thêm</button>
+        <div class="social-link btn-social-link">
+            <a href="{{ route('profile.create') }}" class="btn buy-home" style="text-decoration: none">Thêm liên kết</a>
         </div>
-
-        <p class="onetap-credit">Created by Onetap <i class="fa-solid fa-heart"></i></p>
+        <div class="social-link btn-social-link">
+            <a href="{{ route('myInfos', ['id' => $user->user_id]) }}" class="btn buy-home"
+                style="text-decoration: none"><i class="fa-solid fa-eye"></i> Xem trước</a>
+        </div>
     </section>
 @endsection

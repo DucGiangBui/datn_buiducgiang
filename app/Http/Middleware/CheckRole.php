@@ -18,12 +18,23 @@ class CheckRole
      */
     public function handle($request, Closure $next, $roleName)
     {
-        $role = Auth::user()->role;
+        $user = Auth::user();
 
-        if ($role->name === 'admin') {
-            return redirect()->route('dashboard');
-        } else {
+        if (!$user) {
+            // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang login
+            return redirect()->route('login');
+        }
+
+        $role = $user->role->name;
+
+        if ($role !== $roleName) {
+            // Tránh chuyển hướng đến route hiện tại
+            if ($request->routeIs('home')) {
+                return redirect()->route('profile.index');
+            }
             return redirect()->route('profile.index');
         }
+
+        return $next($request);
     }
 }

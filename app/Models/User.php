@@ -34,10 +34,9 @@ class User extends Authenticatable
         return $this->role && $this->role->name === $roleName;
     }
 
-
-    public function role(): BelongsTo
+    public function role()
     {
-        return $this->belongsTo(Role::class, 'role_id', 'role_id');
+        return $this->belongsTo(Role::class, 'role_id');
     }
 
     // Định nghĩa mối quan hệ với UserInfo
@@ -53,7 +52,7 @@ class User extends Authenticatable
                     ->withPivot('social_url');
     }
 
-    // Định nghĩa mối quan hệ với UserSocialInfo
+    // Định nghĩa mối quan hệ Users với UserSocialInfo
     public function userSocialInfos()
     {
         return $this->hasMany(UserSocialInfo::class, 'user_id', 'user_id');

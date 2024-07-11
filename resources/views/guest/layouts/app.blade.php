@@ -46,7 +46,22 @@
                         <i class="fa-solid fa-phone-volume"></i>
                         <p class="hotline fw-500">HOTLINE</p>
                     </a>
+                    @if (request()->is('login')  || request()->is('profile.*'))
+                        <a class="btn-header-2 fw-700 link-line" href="{{ route('login') }}">ĐĂNG NHẬP</a>
+                    @endif
+                    @if (request()->is('login') || request()->is('profile.*'))
+                        <a class="btn-header-2 fw-700 link-line" href="{{ route('register') }}">ĐĂNG KÝ</a>
+                    @endif
+                    @if (request()->routeIs('profile.*'))
+                        <a class="btn-header-2 fw-700 link-line" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">ĐĂNG XUẤT</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    @endif
                 </div>
+
             </div>
         </div>
     </header>
