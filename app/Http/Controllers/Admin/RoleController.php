@@ -40,7 +40,7 @@ class RoleController extends Controller
      */
     public function store(CreateRoleRequest $request)
     {
-        $dataCreate = $request->all();
+        $dataCreate = $request->only(['card_url', 'template_id']);
         $roles = Role::create($dataCreate);
 
         if ($roles) {
