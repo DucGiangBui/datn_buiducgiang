@@ -9,14 +9,14 @@ class CreateUserInfosTable extends Migration
     public function up()
     {
         Schema::create('user_infos', function (Blueprint $table) {
-            $table->id('info_id');
+            $table->bigIncrements('info_id');
             $table->unsignedBigInteger('user_id');
             $table->string('position');
             $table->string('company');
             $table->string('address');
             $table->string('avatar_url');
-            $table->timestamps();
-
+            $table->string('link_url');
+            
             // Foreign key constraints
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
         });

@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_social_infos', function (Blueprint $table) {
-            $table->id('user_social_id');
+            $table->bigIncrements('user_social_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('social_id');
             $table->string('social_url');
-            $table->integer('number')->nullable();
             $table->timestamps();
-
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+        
             // Foreign key constraints
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->foreign('social_id')->references('social_id')->on('social_infos')->onDelete('cascade');
