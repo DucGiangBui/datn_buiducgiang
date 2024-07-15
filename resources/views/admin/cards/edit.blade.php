@@ -18,11 +18,11 @@
                 </div>
                 <div class="input-group input-group-static mb-4">
                     <label for="template_id">Mẫu thẻ</label>
-                    <select name="template_id" class="form-control" id="template_id">
+                    <select name="template_id" class="form-control" id="template_id" style="height:44px">
                         <option value="">Chọn mẫu thẻ</option>
                         @foreach($templateCards as $templateCard)
                             <option value="{{ $templateCard->template_id }}"
-                                data-image="{{ asset($templateCard->template_url) }}"
+                                data-image="{{ asset($templateCard->front) }}"
                                 {{ $templateCard->template_id == $cards->template_id ? 'selected' : '' }}>
                                 {{ $templateCard->description }}
                             </option>

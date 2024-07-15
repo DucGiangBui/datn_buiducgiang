@@ -31,20 +31,33 @@ class TemplateCardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $file = $request->file('template_url');
-        $fileName = time() . '_' . $file->getClientOriginalName();
-        $file->move(public_path('client/assets/imgs/template_cards'), $fileName);
+{
+    if ($request->hasFile('front') && $request->hasFile('behind')) {
+        $fileFront = $request->file('front');
+        $fileNameFront = time() . '_' . $fileFront->getClientOriginalName();
+        $fileFront->move(public_path('client/assets/imgs/template_cards/front'), $fileNameFront);
+
+        $fileBack = $request->file('behind');
+        $fileNameBack = time() . '_' . $fileBack->getClientOriginalName();
+        $fileBack->move(public_path('client/assets/imgs/template_cards/behind'), $fileNameBack);
 
         TemplateCard::create([
             'template_id' => $request->template_id,
-            'template_url' => 'client/assets/imgs/template_cards/' . $fileName,
+            'front' => 'client/assets/imgs/template_cards/front/' . $fileNameFront,
+            'behind' => 'client/assets/imgs/template_cards/behind/' . $fileNameBack,
             'description' => $request->description,
             'cost' => $request->cost,
         ]);
+
         return redirect()->route('templateCards.index')
-                         ->with('message', 'Thêm thành công mẫu thẻ.!');
+                         ->with('message', 'Thêm thành công mẫu thẻ!');
+    } else {
+        return redirect()->route('templateCards.index')
+                         ->with('error', 'Vui lòng tải lên cả hai mặt của thẻ.');
     }
+}
+
+
     public function edit($id)
     {
         $templates = TemplateCard::findOrFail($id);
@@ -55,17 +68,48 @@ class TemplateCardController extends Controller
     {
         $templates = TemplateCard::findOrFail($id);
 
-        if ($request->hasFile('template_url')) {
-            // Xóa icon cũ
-            $oldFilePath = public_path($templates->template_url);
-            if (file_exists($oldFilePath)) {
-                unlink($oldFilePath);
+        if ($request->hasFile('front')) {
+            $oldFrontPath = public_path($templates->front);
+            if (file_exists($oldFrontPath)) {
+                if (is_writable($oldFrontPath)) {
+                    if (!unlink($oldFrontPath)) {
+                        return redirect()->route('templateCards.index')
+                                        ->with('message', 'Không thể xóa ảnh mặt trước cũ.');
+                    }
+                } else {
+                    return redirect()->route('templateCards.index')
+                                    ->with('message', 'Ảnh mặt trước cũ không có quyền ghi.');
+                }
+            } else {
+                return redirect()->route('templateCards.index')
+                                ->with('message', 'Ảnh mặt trước cũ không tồn tại.');
             }
-            // Lưu icon mới
-            $file = $request->file('template_url');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('client/assets/imgs/template_cards'), $fileName);
-            $socialInfo->template_url = 'client/assets/imgs/template_cards/' . $fileName;
+            $fileFront = $request->file('front');
+            $fileNameFront = time() . '_' . $fileFront->getClientOriginalName();
+            $fileFront->move(public_path('client/assets/imgs/template_cards/front'), $fileNameFront);
+            $templates->front = 'client/assets/imgs/template_cards/front/' . $fileNameFront;
+        }
+
+        if ($request->hasFile('behind')) {
+            $oldBehindPath = public_path($templates->behind);
+            if (file_exists($oldBehindPath)) {
+                if (is_writable($oldBehindPath)) {
+                    if (!unlink($oldBehindPath)) {
+                        return redirect()->route('templateCards.index')
+                                        ->with('message', 'Không thể xóa ảnh mặt sau cũ.');
+                    }
+                } else {
+                    return redirect()->route('templateCards.index')
+                                    ->with('message', 'Ảnh mặt sau cũ không có quyền ghi.');
+                }
+            } else {
+                return redirect()->route('templateCards.index')
+                                ->with('message', 'Ảnh mặt sau cũ không tồn tại.');
+            }
+            $fileBehind = $request->file('behind');
+            $fileNameBehind = time() . '_' . $fileBehind->getClientOriginalName();
+            $fileBehind->move(public_path('client/assets/imgs/template_cards/behind'), $fileNameBehind);
+            $templates->behind = 'client/assets/imgs/template_cards/behind/' . $fileNameBehind;
         }
 
         $templates->description = $request->description;
@@ -73,19 +117,21 @@ class TemplateCardController extends Controller
         $templates->save();
 
         return redirect()->route('templateCards.index')
-                         ->with('message', 'Cập nhật thành công.!');
+                        ->with('message', 'Cập nhật thành công!');
     }
 
     public function destroy($id)
     {
         $templates = TemplateCard::findOrFail($id);
 
-        // Xóa icon khỏi hệ thống
-        $filePath = public_path($templates->template_url);
-        if (file_exists($filePath)) {
-            unlink($filePath);
+        $fileFrontPath = public_path($templates->front);
+        if (file_exists($fileFrontPath)) {
+            unlink($fileFrontPath);
         }
-
+        $fileBehindPath = public_path($templates->behind);
+        if (file_exists($fileFrontPath)) {
+            unlink($fileFrontPath);
+        }
         $templates->delete();
 
         return redirect()->route('templateCards.index')

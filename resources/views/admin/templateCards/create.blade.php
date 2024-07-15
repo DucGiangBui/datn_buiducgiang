@@ -9,8 +9,12 @@
             <form action="{{ route('templateCards.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label for="template_url" class="form-label">Mẫu thẻ</label>
-                    <input type="file" name="template_url" id="template_url" class="form-control form-control-sm">
+                    <label for="front" class="form-label">Mặt trước</label>
+                    <input type="file" name="front" id="front" class="form-control form-control-sm">
+                </div>
+                <div class="form-group">
+                    <label for="behind" class="form-label">Mặt sau</label>
+                    <input type="file" name="behind" id="behind" class="form-control form-control-sm">
                 </div>
                 <div class="input-group input-group-static mb-4">
                     <label for="description">Mô tả</label>

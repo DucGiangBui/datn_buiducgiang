@@ -23,7 +23,7 @@ class UserInfo extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'info_id', 'info_id');
+        return $this->belongsTo(User::class, 'user_id', 'info_id', 'info_id');
     }
 
     public function userInfo()

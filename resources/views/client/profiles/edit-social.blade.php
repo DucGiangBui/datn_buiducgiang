@@ -1,15 +1,15 @@
 @extends('guest.layouts.app')
 
 @section('content')
-    <section class="view-info w-1440px">
+    <section class="view-info w-1440px main-user-infos">
         <div class="info-item">
             <form action="{{ route('profile.update.social', $usocialInfo->user_social_id) }}" method="POST">
                 @csrf
 
                 <div class="input-group">
-                    <input type="text" id="social_url" name="social_url" class="input-group__input input-txt-5 mgt-0"
+                    <input type="text" id="social_url" name="social_url" class="input-group__input input-txt-5 mgt-0" style="width:100%;height: 44px"
                         value="{{ old('social_url', $usocialInfo->social_url) }}" required />
-                    <label for="social_url" class="input-group__label input-label-5">Link</label>
+                    <label for="social_url" class="input-group__label input-label-5">Liên kết</label>
                 </div>
                 <div class="form-group">
                     <label for="social_id">Nền tảng: </label>

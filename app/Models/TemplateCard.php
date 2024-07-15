@@ -9,10 +9,12 @@ class TemplateCard extends Model
 {
     use HasFactory;
     protected $primaryKey = 'template_id';
+    protected $table = 'template_cards';
 
     protected $fillable = [
         'template_id',
-        'template_url',
+        'front',
+        'behind',
         'description',
         'cost',
     ];

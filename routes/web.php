@@ -19,7 +19,8 @@ Route::get('/', [TempCardController::class, 'index'])->name('homepage');
 Route::get('/orders', [TempCardController::class, 'order_index'])->name('orders');
 
 Route::get('/card-info/{cardUrl}', [CardController::class, 'handleCardInfo'])->name('card.info');
-Route::get('/infos/{id}', [GuestController::class, 'index'])->name('myInfos');
+Route::get('/infos/{linkUrl}', [GuestController::class, 'index'])->name('myInfos');
+
 
 Auth::routes();
 
@@ -75,11 +76,13 @@ Route::middleware(['auth','checkrole:admin'])->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile/index', [ClientController::class, 'index'])->name('profile.index');
     Route::get('/user/{id}', [ClientController::class, 'show'])->name('user.show');
+    Route::get('/profile/card', [ClientController::class, 'cardindex'])->name('profile.card');
     Route::get('/profile/create', [ClientController::class, 'createSocial'])->name('profile.create');
     Route::post('/profile/store/social', [ClientController::class, 'storeSocial'])->name('profile.store.social');
     Route::get('/profile/edit', [ClientController::class, 'edit'])->name('profile.edit');
     Route::post('/profile/update', [ClientController::class, 'updateProfile'])->name('profile.update');
     Route::post('/profile/delete', [ClientController::class, 'destroySocial'])->name('profile.destroy');
+    Route::post('/profile/update-url', [ClientController::class, 'updateUrl'])->name('profile.updateUrl');
     Route::get('/profile/edit/avatar', [ClientController::class, 'editAvatar'])->name('profile.edit.avatar');
     Route::get('/profile/edit/info', [ClientController::class, 'editInfo'])->name('profile.edit.info');
     Route::get('/profile/edit/social/{id}', [ClientController::class, 'editSocial'])->name('profile.edit.social');

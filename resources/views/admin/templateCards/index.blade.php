@@ -18,7 +18,8 @@
             <table class="table table-hover">
                 <tr>
                     <th>#</th>
-                    <th>Mẫu thẻ</th>
+                    <th>Mặt trước</th>
+                    <th>Mặt sau</th>
                     <th>Mô tả</th>
                     <th>Đơn giá</th>
                     <th>Chỉnh sửa</th>
@@ -27,7 +28,8 @@
                 @foreach ($templates as $template)
                     <tr>
                         <td>{{ $template->template_id }}</td>
-                        <td><img style="width: 100px;" src="{{ asset($template->template_url) }}" alt="icon" width="50"></td>
+                        <td><img style="width: 100px;" src="{{ asset($template->front) }}" alt="icon" width="50"></td>
+                        <td><img style="width: 100px;" src="{{ asset($template->behind) }}" alt="icon" width="50"></td>
                         <td>{{ $template->description }}</td>
                         <td>{{ $template->cost }}</td>
                         <td>

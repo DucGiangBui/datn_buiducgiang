@@ -27,7 +27,10 @@ class User extends Authenticatable
         'name',
         'email',
         'gender',
+        'link_url',
         'role_id',
+        'card_id',
+        'info_id',
     ];
     public function hasRole($roleName)
     {
@@ -39,23 +42,25 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id');
     }
 
-    // Định nghĩa mối quan hệ với UserInfo
     public function userInfo()
     {
         return $this->hasOne(UserInfo::class, 'user_id', 'user_id');
     }
 
-    // Định nghĩa mối quan hệ với SocialInfo
     public function socialInfos()
     {
         return $this->belongsToMany(SocialInfo::class, 'user_social_infos', 'user_id', 'social_id')
                     ->withPivot('social_url');
     }
 
-    // Định nghĩa mối quan hệ Users với UserSocialInfo
     public function userSocialInfos()
     {
         return $this->hasMany(UserSocialInfo::class, 'user_id', 'user_id');
+    }
+
+    public function card()
+    {
+        return $this->belongsTo(Card::class, 'card_id', 'card_id');
     }
     /**
      * The attributes that should be hidden for serialization.
