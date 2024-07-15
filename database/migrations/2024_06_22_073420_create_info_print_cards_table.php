@@ -9,7 +9,7 @@ class CreateInfoPrintCardsTable extends Migration
     public function up()
     {
         Schema::create('info_print_cards', function (Blueprint $table) {
-            $table->id('info_print_id');
+            $table->bigIncrements('info_print_id');
             $table->string('name');
             $table->string('position');
         });
