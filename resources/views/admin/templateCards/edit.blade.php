@@ -22,10 +22,15 @@
         <form action="{{ route('templateCards.update', $templates->template_id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="form-group input-group-static mb-4">
-                <label for="template_url">Mẫu thẻ</label>
-                <input type="file" name="template_url" id="template_url" class="form-control form-control-sm">
-                <img src="{{ asset($templates->template_url) }}" alt="icon" width="50" class="mt-2">
+            <div class="form-group">
+                <label for="front" class="form-label">Mặt trước</label>
+                <input type="file" name="front" id="front" class="form-control form-control-sm">
+                <img src="{{ asset($templates->front) }}" alt="icon" width="50" class="mt-2">
+            </div>
+            <div class="form-group">
+                <label for="behind" class="form-label">Mặt sau</label>
+                <input type="file" name="behind" id="behind" class="form-control form-control-sm">
+                <img src="{{ asset($templates->behind) }}" alt="icon" width="50" class="mt-2">
             </div>
             <div class="input-group input-group-static mb-4">
                 <label for="platform">Mô tả</label>

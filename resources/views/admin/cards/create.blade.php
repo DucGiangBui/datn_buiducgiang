@@ -20,7 +20,7 @@
                     <select name="template_id" class="form-control" id="template_id">
                         <option value="">Chọn mẫu thẻ</option>
                         @foreach($templateCards as $templateCard)
-                            <option value="{{ $templateCard->template_id }}" data-image="{{ asset($templateCard->template_url) }}">
+                            <option value="{{ $templateCard->template_id }}" data-image="{{ asset($templateCard->front) }}">
                                 {{ $templateCard->description }}
                             </option>
                         @endforeach

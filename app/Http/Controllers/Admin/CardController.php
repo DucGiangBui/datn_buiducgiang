@@ -19,25 +19,20 @@ class CardController extends Controller
     {
         $cards = Card::with('templateCard')->paginate(5);
         return view('admin.cards.index', compact('cards'));
-        // return view('admin.cards.index');
     }
-
     public function handleCardInfo($cardUrl)
     {
         $card = Card::where('card_url', $cardUrl)->first();
-
         if (!$card) {
             abort(404, 'Card not found');
         }
-
         $user = User::where('card_id', $card->card_id)->first();
-
         if (!$user) {
             abort(404, 'User not found');
         }
-
-        return redirect()->route('myInfos', ['id' => $user->user_id]);
+        return redirect()->route('myInfos', ['linkUrl' => $user->link_url]);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -122,10 +117,10 @@ class CardController extends Controller
      */
     public function destroy($id)
     {
-            $role = Card::findOrFail($id);
-            $role->delete();
-            if($role){
-                return redirect()->route('roles.index')->with('message', 'Xóa thẻ thành công!');
+            $card = Card::findOrFail($id);
+            $card->delete();
+            if($card){
+                return redirect()->route('cards.index')->with('message', 'Xóa thẻ thành công!');
             }
             return back()->withErrors(['message' => 'Xóa thẻ không thành công!']);
         }

@@ -1,7 +1,7 @@
 @extends('guest.layouts.app')
 
 @section('content')
-    <section class="view-info w-1440px">
+    <section class="view-info w-1440px main-user-infos">
         <div class="info-item">
             <div class="avt-user">
                 <div class="avt-back">
@@ -19,7 +19,7 @@
                 {{ $user->name }}
             </h1>
             <h4 class="position-user fw-300">
-                {{ $user->userInfo->position ?? 'Position not provided.' }}
+                {{ $user->userInfo->position}}
             </h4>
         </div>
 
@@ -58,7 +58,7 @@
             <a href="{{ route('profile.create') }}" class="btn buy-home" style="text-decoration: none">Thêm liên kết</a>
         </div>
         <div class="social-link btn-social-link">
-            <a href="{{ route('myInfos', ['id' => $user->user_id]) }}" class="btn buy-home"
+            <a href="{{ route('myInfos', ['linkUrl' => $user->link_url]) }}" class="btn buy-home"
                 style="text-decoration: none"><i class="fa-solid fa-eye"></i> Xem trước</a>
         </div>
     </section>

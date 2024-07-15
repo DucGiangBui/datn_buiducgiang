@@ -1,7 +1,7 @@
 @extends('guest.layouts.app')
 
 @section('content')
-    <section class="view-info w-1440px">
+    <section class="view-info w-1440px  main-user-infos">
         <div class="info-item">
             <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -19,13 +19,13 @@
                     </div>
                 </div>
                 <div class="input-group">
-                    <input class="input-group__input input-txt-5" type="text" name="name"
+                    <input class="input-group__input input-txt-5" style="height: 44px" type="text" name="name"
                         value="{{ old('name', $user->name) }}" required>
                     <label class="input-group__label input-label-5" for="name">Họ và tên</label>
                 </div>
 
                 <div class="input-group">
-                    <input class="input-group__input input-txt-5" type="text" name="position"
+                    <input class="input-group__input input-txt-5" style="height: 44px" type="text" name="position"
                         value="{{ old('position', $user->userInfo->position ?? '') }}">
                     <label class="input-group__label input-label-5" for="position">Mô tả ngắn</label>
                 </div>

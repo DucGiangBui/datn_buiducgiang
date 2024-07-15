@@ -1,12 +1,11 @@
 <?php
-// app/Http/Controllers/Client/ClientController.php
-// app/Http/Controllers/Client/ClientController.php
 namespace App\Http\Controllers\Client;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Card;
 use App\Models\UserInfo;
 use App\Models\SocialInfo;
 use App\Models\UserSocialInfo;
@@ -24,6 +23,24 @@ class ClientController extends Controller
     {
         $user = User::with('userInfo', 'socialInfos')->findOrFail($id);
         return view('guest.index', compact('user'));
+    }
+    public function cardIndex()
+    {
+        $user = auth()->user();
+        $userInfo = UserInfo::where('user_id', $user->user_id)->first();
+        $card = Card::where('card_id', $user->card_id)->first();
+        $template = TemplateCard::where('template_id', $card->template_id)->first();
+
+        return view('client.profiles.card', compact('user', 'template'));
+    }
+
+    public function updateUrl(Request $request)
+    {
+        $user = Auth::user();
+
+        $user->link_url = $request->input('link_url');
+        $user->save();
+        return redirect()->route('profile.index')->with('success', 'Link URL đã được cập nhật thành công!');
     }
 
     public function edit()
@@ -65,9 +82,6 @@ class ClientController extends Controller
         return redirect()->route('profile.index')->with('success', 'Profile updated successfully.');
     }
 
-    // app/Http/Controllers/Client/ClientController.php
-
-    // Phương thức lưu thông tin mạng xã hội mới vào cơ sở dữ liệu
 
     public function editProfile()
     {
@@ -81,7 +95,6 @@ class ClientController extends Controller
         return view('client.profiles.create-social', compact('allSocialInfos'));
     }
 
-    // Phương thức lưu thông tin mạng xã hội mới vào cơ sở dữ liệu
     public function storeSocial(Request $request)
     {
         $request->validate([
@@ -92,7 +105,7 @@ class ClientController extends Controller
         $user = Auth::user();
         $user->socialInfos()->attach($request->input('social_id'), [
             'social_url' => $request->input('social_url'),
-            'status' => 1, // hoặc giá trị mặc định khác cho `status`
+            'status' => 1,
         ]);
 
         return redirect()->route('profile.index')->with('success', 'Social link added successfully.');
@@ -106,26 +119,19 @@ class ClientController extends Controller
 
         $userInfo = $user->userInfo;
 
-        // Xử lý ảnh đại diện nếu có
         if ($request->hasFile('avatar')) {
-            // Xóa file cũ nếu có
             if ($userInfo && $userInfo->avatar_url) {
                 $oldFilePath = public_path($userInfo->avatar_url);
                 if (file_exists($oldFilePath)) {
                     unlink($oldFilePath);
                 }
             }
-
-            // Lưu file mới vào thư mục client/assets/imgs/avatars
             $file = $request->file('avatar');
             $fileName = time() . '_' . $file->getClientOriginalName();
             $filePath = 'client/assets/imgs/avatars/' . $fileName;
             $file->move(public_path('client/assets/imgs/avatars'), $fileName);
 
-            // Cập nhật đường dẫn
             $avatarUrl = $filePath;
-
-            // Nếu không có thông tin người dùng, tạo mới
             if (!$userInfo) {
                 $userInfo = new UserInfo();
                 $userInfo->user_id = $user->id;
@@ -133,7 +139,6 @@ class ClientController extends Controller
             $userInfo->avatar_url = $avatarUrl;
         }
 
-        // Cập nhật thông tin người dùng
         if ($userInfo) {
             $userInfo->position = $request->input('position');
             $userInfo->save();

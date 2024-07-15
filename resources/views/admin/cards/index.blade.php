@@ -19,7 +19,8 @@
                 <tr>
                     <th>#</th>
                     <th>Liên kết</th>
-                    <th>Mẫu thẻ</th>
+                    <th>Mặt trước</th>
+                    <th>Mặt sau</th>
                     <th>Chỉnh sửa</th>
                     <th>Xoá</th>
                 </tr>
@@ -27,7 +28,8 @@
                     <tr>
                         <td>{{ $card->card_id }}</td>
                         <td>{{ $card->card_url }}</td>
-                        <td><img style="width: 100px;" src="{{ asset($card->templateCard->template_url) }}" alt="icon" width="50"></td>
+                        <td><img style="width: 100px;" src="{{ asset($card->templateCard->front) }}" alt="icon" width="50"></td>
+                        <td><img style="width: 100px;" src="{{ asset($card->templateCard->behind) }}" alt="icon" width="50"></td>
                         <td>
                             <a href="{{ route('cards.edit',$card->card_id) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>
@@ -47,7 +49,7 @@
 
     <script>
         function confirmDelete() {
-            if (confirm('Bạn có chắc chắn muốn xóa vai trò này không?')) {
+            if (confirm('Bạn có chắc chắn muốn xóa mẫu thẻ này không?')) {
                 document.getElementById('delete-role-form').submit();
             }
         }

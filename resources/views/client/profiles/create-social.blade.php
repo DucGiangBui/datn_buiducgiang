@@ -1,7 +1,7 @@
 @extends('guest.layouts.app')
 
 @section('content')
-    <section class="view-info w-1440px">
+    <section class="view-info w-1440px main-user-infos">
         <div class="info-item">
             <form action="{{ route('profile.store.social') }}" method="POST">
                 @csrf

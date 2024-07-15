@@ -15,12 +15,16 @@ class GuestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
-    {
-        $user = User::with('userInfo', 'socialInfos')->find($id);
-        if (!$user) {
-            abort(404, 'User not found');
-        }
-        return view('guest.index', compact('user'));
+    public function index($linkUrl)
+{
+    $user = User::where('link_url', $linkUrl)
+                ->with('userInfo', 'socialInfos')
+                ->first();
+
+    if (!$user) {
+        abort(404, 'User not found');
     }
+
+    return view('guest.index', compact('user'));
+}
 }

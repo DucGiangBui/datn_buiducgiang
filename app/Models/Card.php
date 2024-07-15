@@ -9,14 +9,14 @@ class Card extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'card_id';
+    protected $table = 'cards';
     public $incrementing = false;
     protected $keyType = 'bigInteger';
 
-    protected $fillable = [
-        'card_url',
-        'template_id', // Thêm thuộc tính này
-    ];
+    protected $fillable = ['card_url', 'template_id'];
+
+    protected $primaryKey = 'card_id';
+    
     public function templateCard()
     {
         return $this->belongsTo(TemplateCard::class, 'template_id', 'template_id');
