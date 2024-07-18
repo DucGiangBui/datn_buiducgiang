@@ -51,7 +51,7 @@
                 <h1 class="introduction-5__bigtitle fw-300">DEMO</h1>
                 <h1 class="introduction-5__title">NHẬP THÔNG TIN CỦA BẠN</h1>
                 <div class="input-group">
-                    <input type="text" id="input-name1" class="input-group__input input-txt-5" required />
+                    <input type="text" id="input-name" class="input-group__input input-txt-5" required />
                     <label for="fname" class="input-group__label input-label-5">Họ và tên</label>
                 </div>
                 <div class="input-group">
@@ -66,12 +66,13 @@
             </div>
             <div class="introduction-5__images w-50per">
                 <div class="credit-card" id="card">
+                    <h4 style="text-align: center; font-size:25px; font-weight: 400">GIÁ SẢN PHẨM: 100.000đ</h4>
                     <div class="card-img" id="card-img"
                         style="background-image: url(./assets/imgs/template_cards/Template1@2x.png)">
                         <div class="details-card">
                             <div>
-                                <span id="card-holder-name">Your Name Here</span>
-                                <span id="card-position">your position</span>
+                                <span id="card-holder-name">Nhập tên của bạn</span>
+                                <span id="card-position">Nhập chức vụ của bạn</span>
                             </div>
                         </div>
                     </div>

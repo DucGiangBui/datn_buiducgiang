@@ -89,12 +89,12 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h6 class="mb-0 ">Website Views</h6>
-                                <p class="text-sm ">Last Campaign Performance</p>
+                                <h6 class="mb-0 ">Lượt xem</h6>
+                                <p class="text-sm ">Hiệu suất</p>
                                 <hr class="dark horizontal">
                                 <div class="d-flex ">
                                     <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                    <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
+                                    <p class="mb-0 text-sm"> Chiến dịch đã được gửi 2 ngày trước </p>
                                 </div>
                             </div>
                         </div>
@@ -109,13 +109,12 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h6 class="mb-0 "> Daily Sales </h6>
-                                <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today
-                                    sales. </p>
+                                <h6 class="mb-0 "> Doanh số hàng ngày </h6>
+                                <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) doanh số bán hàng ngày hôm nay tăng. </p>
                                 <hr class="dark horizontal">
                                 <div class="d-flex ">
                                     <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                    <p class="mb-0 text-sm"> updated 4 min ago </p>
+                                    <p class="mb-0 text-sm"> Cập nhật 4 phút trước </p>
                                 </div>
                             </div>
                         </div>
@@ -130,12 +129,12 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h6 class="mb-0 ">Completed Tasks</h6>
-                                <p class="text-sm ">Last Campaign Performance</p>
+                                <h6 class="mb-0 ">Trả lời tư vấn</h6>
+                                <p class="text-sm ">Hiệu suất</p>
                                 <hr class="dark horizontal">
                                 <div class="d-flex ">
                                     <i class="material-icons text-sm my-auto me-1">schedule</i>
-                                    <p class="mb-0 text-sm">just updated</p>
+                                    <p class="mb-0 text-sm">Vừa cập nhật</p>
                                 </div>
                             </div>
                         </div>
@@ -151,9 +150,8 @@
                                 <script>
                                     document.write(new Date().getFullYear())
                                 </script>,
-                                made with <i class="fa fa-heart"></i> by
-                                <a href="#" class="font-weight-bold" target="_blank">Onetap</a>
-                                for a better web.
+                                bản quyền thuộc về <i class="fa fa-heart"></i>
+                                <a href="{{ route('homepage') }}" class="font-weight-bold" target="_blank">Onetap</a>
                             </div>
                         </div>
                         <div class="col-lg-6">

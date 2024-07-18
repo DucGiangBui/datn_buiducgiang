@@ -7,13 +7,13 @@
           <i class="material-icons opacity-10">weekend</i>
         </div>
         <div class="text-end pt-1">
-          <p class="text-sm mb-0 text-capitalize">Today's Money</p>
-          <h4 class="mb-0">$53k</h4>
+          <p class="text-sm mb-0 text-capitalize">Doanh thu</p>
+          <h4 class="mb-0">+20.000.000</h4>
         </div>
       </div>
       <hr class="dark horizontal my-0">
       <div class="card-footer p-3">
-        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p>
+        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>so với tuần trước</p>
       </div>
     </div>
   </div>
@@ -24,13 +24,13 @@
           <i class="material-icons opacity-10">person</i>
         </div>
         <div class="text-end pt-1">
-          <p class="text-sm mb-0 text-capitalize">Today's Users</p>
+          <p class="text-sm mb-0 text-capitalize">Người dùng</p>
           <h4 class="mb-0">2,300</h4>
         </div>
       </div>
       <hr class="dark horizontal my-0">
       <div class="card-footer p-3">
-        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than last month</p>
+        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>so với tháng trước</p>
       </div>
     </div>
   </div>
@@ -41,13 +41,13 @@
           <i class="material-icons opacity-10">person</i>
         </div>
         <div class="text-end pt-1">
-          <p class="text-sm mb-0 text-capitalize">New Clients</p>
+          <p class="text-sm mb-0 text-capitalize">Lượt truy cập</p>
           <h4 class="mb-0">3,462</h4>
         </div>
       </div>
       <hr class="dark horizontal my-0">
       <div class="card-footer p-3">
-        <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than yesterday</p>
+        <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> so với hôm qua</p>
       </div>
     </div>
   </div>
@@ -58,13 +58,13 @@
           <i class="material-icons opacity-10">weekend</i>
         </div>
         <div class="text-end pt-1">
-          <p class="text-sm mb-0 text-capitalize">Sales</p>
-          <h4 class="mb-0">$103,430</h4>
+          <p class="text-sm mb-0 text-capitalize">Lượt mua hàng</p>
+          <h4 class="mb-0">+128</h4>
         </div>
       </div>
       <hr class="dark horizontal my-0">
       <div class="card-footer p-3">
-        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>than yesterday</p>
+        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>so với hôm qua</p>
       </div>
     </div>
   </div>

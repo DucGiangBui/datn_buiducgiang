@@ -2,15 +2,18 @@
 @section('title', 'Người dùng')
 @section('content')
     <div class="card">
-        <h1>Danh sách người dùng</h1>
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+              <h4 class="text-white text-capitalize ps-3">DANH SÁCH NGƯỜI DÙNG</h4>
+            </div>
+          </div>
+        <div>
         @if (Session::has('message'))
             <div class="alert alert-success text-black">
                 {{ Session::get('message') }}
             </div>
         @endif
-
-        <div>
-            <a href="{{ route('users.create') }}" class="btn btn-primary">Thêm mới</a>
+            <a href="{{ route('users.create') }}" class="btn btn-primary mt-3">Thêm mới</a>
         </div>
         <div>
             <table class="table table-hover">

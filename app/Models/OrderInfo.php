@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class OrderInfo extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'order_info_id';
+
+    protected $fillable = [
+        'name',
+        'position',
+        'address',
+        'phone',
+        'payment_id',
+        'info_print_id',
+    ];
 }

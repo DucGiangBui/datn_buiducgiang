@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
 
     // Update name and position in the card
-    const inputName = document.getElementById("input-name1");
+    const inputName = document.getElementById("input-name");
     const inputPosition = document.getElementById("input-position");
     const cardHolderName = document.getElementById("card-holder-name");
     const cardPosition = document.getElementById("card-position");

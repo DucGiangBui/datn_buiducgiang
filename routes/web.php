@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -11,6 +10,8 @@ use App\Http\Controllers\Admin\TemplateCardController;
 use App\Http\Controllers\Client\TempCardController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\Client\OrderController;
+use App\Http\Controllers\Admin\OrderAdminController;
 use App\Http\Controllers\Admin\CardController;
 
 
@@ -21,6 +22,7 @@ Route::get('/orders', [TempCardController::class, 'order_index'])->name('orders'
 Route::get('/card-info/{cardUrl}', [CardController::class, 'handleCardInfo'])->name('card.info');
 Route::get('/infos/{linkUrl}', [GuestController::class, 'index'])->name('myInfos');
 
+Route::post('/neworders', [OrderController::class, 'store'])->name('neworders.store');
 
 Auth::routes();
 
@@ -69,6 +71,13 @@ Route::middleware(['auth','checkrole:admin'])->group(function () {
         Route::put('cards/{card}', [CardController::class, 'update'])->name('cards.update');
         Route::delete('cards/{card}', [CardController::class, 'destroy'])->name('cards.destroy');
 
+        Route::get('ordersMaster', [OrderAdminController::class, 'index'])->name('ordersMaster.index');
+        Route::get('ordersMaster/create', [OrderAdminController::class, 'create'])->name('ordersMaster.create');
+        Route::post('ordersMaster', [OrderAdminController::class, 'store'])->name('ordersMaster.store');
+        Route::get('ordersMaster/{card}', [OrderAdminController::class, 'show'])->name('ordersMaster.show');
+        Route::get('ordersMaster/{card}/edit', [OrderAdminController::class, 'edit'])->name('ordersMaster.edit');
+        Route::put('ordordersMasterers/{card}', [OrderAdminController::class, 'update'])->name('ordersMaster.update');
+        Route::delete('ordersMaster/{card}', [OrderAdminController::class, 'destroy'])->name('ordersMaster.destroy');
 });
 
 // routes/web.php

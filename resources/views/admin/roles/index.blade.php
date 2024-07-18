@@ -2,8 +2,14 @@
 @section('title', 'Vai trò')
 @section('content')
     <div class="card">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+              <h4 class="text-white text-capitalize ps-3">DANH SÁCH VAI TRÒ</h4>
+            </div>
+          </div>
+        <div>
         <h1>
-            Danh sách vai trò
+
         </h1>
         @if (Session::has('message'))
             <div class="alert alert-success text-black">
@@ -12,7 +18,7 @@
         @endif
 
         <div>
-            <a href="{{ route('roles.create') }}" class="btn btn-primary">Thêm mới</a>
+            <a href="{{ route('roles.create') }}" class="btn btn-primary mt-2">Thêm mới</a>
         </div>
         <div>
             <table class="table table-hover">
