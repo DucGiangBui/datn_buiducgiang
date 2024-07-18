@@ -18,4 +18,9 @@ class TemplateCard extends Model
         'description',
         'cost',
     ];
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
+    }
 }

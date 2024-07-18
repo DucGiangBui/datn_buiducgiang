@@ -10,12 +10,12 @@ class TempCardController extends Controller
 {
     public function index()
     {
-        $templateCards = TemplateCard::all();
+        $templateCards = TemplateCard::where('template_id', '!=', 0)->get();
         return view('client.homes.index', compact('templateCards'));
     }
     public function order_index()
     {
-        $templateCards = TemplateCard::all();
+        $templateCards = TemplateCard::where('template_id', '!=', 0)->get();
         return view('client.homes.orders', compact('templateCards'));
     }
 }

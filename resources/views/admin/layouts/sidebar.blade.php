@@ -8,7 +8,7 @@
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
+        <a class="navbar-brand m-0" href="{{ route('dashboard') }}"
             target="_blank">
             <img src="{{ asset('client/assets/imgs/LOGO.png') }}" class="navbar-brand-img h-100" alt="main_logo">
         </a>
@@ -21,7 +21,7 @@
                     <a class="nav-link text-white {{ request()->routeIs('dashboard') ? 'active bg-gradient-primary' : '' }}"
                         href="{{ route('dashboard') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">dashboard</i>
+                            <i class="fa-solid fa-users"></i>
                         </div>
                         <span class="nav-link-text ms-1">Bảng tin</span>
                     </a>
@@ -39,7 +39,7 @@
                     <a class="nav-link text-white {{ request()->routeIs('users.*') ? 'active bg-gradient-primary' : '' }}"
                         href="{{ route('users.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="fa-solid fa-user"></i>
                         </div>
                         <span class="nav-link-text ms-1">Quản lý người dùng</span>
                     </a>
@@ -48,7 +48,7 @@
                     <a class="nav-link text-white {{ request()->routeIs('socialInfos.*') ? 'active bg-gradient-primary' : '' }}"
                         href="{{ route('socialInfos.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
+                            <i class="fa-solid fa-icons"></i>
                         </div>
                         <span class="nav-link-text ms-1">Quản lý Icon $ MXH</span>
                     </a>
@@ -57,7 +57,7 @@
                     <a class="nav-link text-white {{ request()->routeIs('templateCards.*') ? 'active bg-gradient-primary' : '' }}"
                         href="{{ route('templateCards.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">view_in_ar</i>
+                            <i class="fa-solid fa-credit-card"></i>
                         </div>
                         <span class="nav-link-text ms-1">Quản lý thẻ mẫu</span>
                     </a>
@@ -66,27 +66,27 @@
                     <a class="nav-link text-white {{ request()->routeIs('cards.*') ? 'active bg-gradient-primary' : '' }}"
                         href="{{ route('cards.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
+                            <i class="fa-solid fa-address-card"></i>
                         </div>
                         <span class="nav-link-text ms-1">Quản lý thẻ</span>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                <a class="nav-link text-white " href="#">
+                <li class="nav-item">
+                <a class="nav-link text-white {{ request()->routeIs('ordersMaster.*') ? 'active bg-gradient-primary' : '' }}" href="{{ route('ordersMaster.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
+                        <i class="fa-solid fa-cart-shopping"></i>
                     </div>
                     <span class="nav-link-text ms-1">Quản lý đơn hàng</span>
                 </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link text-white " href="#">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
                         </div>
                         <span class="nav-link-text ms-1">Đường dẫn thông tin</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link text-white " href="#">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -94,7 +94,7 @@
                         </div>
                         <span class="nav-link-text ms-1">Thông báo</span>
                     </a>
-                </li> --}}
+                </li>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Tài khoản</h6>
                 </li>
