@@ -12,7 +12,7 @@
     @vite(['resources/js/app.js', 'resources/css/app.css'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <link id="pagestyle" href="{{ asset('admin/assets/css/material-dashboard.css?v=3.1.0') }}" rel="stylesheet" />
+    <link id="Trang chủtyle" href="{{ asset('admin/assets/css/material-dashboard.css?v=3.1.0') }}" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
     <!-- Bootstrap CSS -->
@@ -30,22 +30,57 @@
             data-scroll="true">
             <div class="container-fluid py-1 px-3">
                 @if (auth()->check())
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a>
-                        </li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
-                    </ol>
-                    <h6 class="font-weight-bolder mb-0">Dashboard</h6>
-                </nav>
+                    @php
+                        $breadcrumbs = [
+                            'roles.index' => ['Trang chủ', 'Vai trò'],
+                            'roles.create' => ['Vai trò', 'Thêm mới vai trò'],
+                            'roles.show' => ['Vai trò', 'Danh sách vai trò'],
+                            'roles.edit' => ['Vai trò', 'Chỉnh sửa vai trò'],
+                            'users.index' => ['Trang chủ', 'Người dùng'],
+                            'users.create' => ['Users', 'Thêm mới người dùng'],
+                            'users.show' => ['Users', 'Danh sách người dùng'],
+                            'users.edit' => ['Users', 'Chỉnh sửa người dùng'],
+                            'socialInfos.index' => ['Trang chủ', 'MXH'],
+                            'socialInfos.create' => ['MXH', 'Thêm mới MXH'],
+                            'socialInfos.show' => ['MXH', 'Danh sách MXH'],
+                            'socialInfos.edit' => ['MXH', 'Chỉnh sửa MXH'],
+                            'templateCards.index' => ['Trang chủ', 'Mẫu thẻ'],
+                            'templateCards.create' => ['Mẫu thẻ', 'Thêm mới mẫu thẻ'],
+                            'templateCards.show' => ['Mẫu thẻ', 'Danh sách mẫu thẻ'],
+                            'templateCards.edit' => ['Mẫu thẻ', 'Chỉnh sửa mẫu thẻ'],
+                            'cards.index' => ['Trang chủ', 'Card visit'],
+                            'cards.create' => ['Card visit', 'Thêm mới card visit'],
+                            'cards.show' => ['Card visit', 'Danh sách card visit'],
+                            'cards.edit' => ['Card visit', 'Chỉnh sửa card visit'],
+                            'ordersMaster.index' => ['Trang chủ', 'Đơn hàng'],
+                            'ordersMaster.create' => ['Đơn hàng', 'Thêm mới đơn hàng'],
+                            'ordersMaster.show' => ['Đơn hàng', 'Danh sách đơn hàng'],
+                            'ordersMaster.edit' => ['Đơn hàng', 'Chỉnh sửa đơn hàng'],
+                        ];
+
+                        $currentRouteName = Route::currentRouteName();
+                        $breadcrumb = $breadcrumbs[$currentRouteName] ?? ['Trang chủ', 'Dashboard'];
+                    @endphp
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                            <li class="breadcrumb-item text-sm">
+                                <a class="opacity-5 text-dark" href="javascript:;">{{ $breadcrumb[0] }}</a>
+                            </li>
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
+                                {{ $breadcrumb[1] }}</li>
+                        </ol>
+                        <h6 class="font-weight-bolder mb-0">{{ $breadcrumb[1] }}</h6>
+                    </nav>
                 @endif
+
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                         @if (auth()->check())
-                        <div class="input-group input-group-outline">
-                            <label class="form-label">Type here...</label>
-                            <input type="text" class="form-control">
-                        </div>
+                            <div class="input-group input-group-outline">
+                                <label class="form-label">Type here...</label>
+                                <input type="text" class="form-control">
+                            </div>
                         @endif
                     </div>
                     <ul class="navbar-nav justify-content-end">
@@ -62,7 +97,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link fw-600" href="#" >
+                                <a id="navbarDropdown" class="nav-link fw-600" href="#">
                                     {{ Auth::user()->name }}
                                 </a>
                             </li>
@@ -110,7 +145,8 @@
                             </div>
                             <div class="card-body">
                                 <h6 class="mb-0 "> Doanh số hàng ngày </h6>
-                                <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) doanh số bán hàng ngày hôm nay tăng. </p>
+                                <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) doanh số bán hàng
+                                    ngày hôm nay tăng. </p>
                                 <hr class="dark horizontal">
                                 <div class="d-flex ">
                                     <i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -151,7 +187,8 @@
                                     document.write(new Date().getFullYear())
                                 </script>,
                                 bản quyền thuộc về <i class="fa fa-heart"></i>
-                                <a href="{{ route('homepage') }}" class="font-weight-bold" target="_blank">Onetap</a>
+                                <a href="{{ route('homepage') }}" class="font-weight-bold"
+                                    target="_blank">Onetap</a>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -516,7 +553,7 @@
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example Trang chủ etc -->
     <script src="{{ asset('admin/assets/js/material-dashboard.min.js?v=3.1.0') }}"></script><!-- Bootstrap Bundle with Popper -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 

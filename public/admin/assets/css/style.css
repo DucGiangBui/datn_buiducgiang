@@ -4,5 +4,39 @@
     vertical-align: middle;
     margin-right: 10px;
 }
+html{
+    font-family: "Montserrat", sans-serif;
+}
+body{
+    font-family: "Montserrat", sans-serif;
+}
+.card, .card-body{
+    font-family: "Montserrat", sans-serif;
+}
 
+label, .form-label
+{
+    font-family: "Montserrat", sans-serif;
+}
+.form-control{
+    font-family: "Montserrat", sans-serif;
+}
+.status-1 {
+    font-weight: 700;
+    color: red;
+}
 
+.status-2 {
+    font-weight: 700;
+    color: darkorange;
+}
+
+.status-3 {
+    font-weight: 700;
+    color: blue;
+}
+
+.status-4 {
+    font-weight: 700;
+    color: green;
+}

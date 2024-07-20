@@ -9,7 +9,7 @@
           </div>
         <div>
         @if (Session::has('message'))
-            <div class="alert alert-success text-black">
+            <div class="alert alert-success text-black mt-3">
                 {{ Session::get('message') }}
             </div>
         @endif
@@ -34,7 +34,7 @@
                         <td><img style="width: 100px;" src="{{ asset($template->front) }}" alt="icon" width="50"></td>
                         <td><img style="width: 100px;" src="{{ asset($template->behind) }}" alt="icon" width="50"></td>
                         <td>{{ $template->description }}</td>
-                        <td>{{ number_format($template->cost, 0, ',', '.') }} đ</td>
+                        <td>{{ number_format($template->cost, 0, ',', '.') }} VNĐ</td>
                         <td>
                             <a href="{{ route('templateCards.edit', $template->template_id) }}"><i
                                     class="fa-solid fa-pen-to-square"></i></a>

@@ -19,6 +19,10 @@ class Order extends Model
 
     public function orderInfo()
     {
-        return $this->belongsTo(OrderInfo::class, 'order_info_id');
+        return $this->belongsTo(OrderInfo::class, 'order_info_id', 'order_info_id');
+    }
+    public function templateCard()
+    {
+        return $this->belongsTo(TemplateCard::class, 'template_id', 'template_id');
     }
 }

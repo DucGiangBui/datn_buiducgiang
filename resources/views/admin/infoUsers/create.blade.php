@@ -5,7 +5,7 @@
         <h1>
             Thêm mới người dùng
         </h1>
-        <div>
+        <div class="mt-3">
             <form action="{{ route('users.store') }}" method="post">
                 @csrf
                 <div class="input-group input-group-static mb-4">

@@ -4,8 +4,13 @@
 
 @section('content')
     <div class="card">
-        <h1>Cập nhật thẻ</h1>
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+              <h4 class="text-white text-capitalize ps-3">CHỈNH SỬA THẺ</h4>
+            </div>
+          </div>
         <div>
+        <div class="mt-3">
             <form action="{{ route('cards.update', $cards->card_id) }}" method="post">
                 @csrf
                 @method('PUT') <!-- Thêm dòng này để sử dụng phương thức PUT -->

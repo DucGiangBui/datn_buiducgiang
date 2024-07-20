@@ -19,4 +19,9 @@ class OrderInfo extends Model
         'payment_id',
         'info_print_id',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'order_info_id', 'order_info_id');
+    }
 }

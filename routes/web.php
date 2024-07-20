@@ -66,18 +66,18 @@ Route::middleware(['auth','checkrole:admin'])->group(function () {
         Route::get('cards', [CardController::class, 'index'])->name('cards.index');
         Route::get('cards/create', [CardController::class, 'create'])->name('cards.create');
         Route::post('cards', [CardController::class, 'store'])->name('cards.store');
-        Route::get('cards/{card}', [CardController::class, 'show'])->name('cards.show');
-        Route::get('cards/{card}/edit', [CardController::class, 'edit'])->name('cards.edit');
-        Route::put('cards/{card}', [CardController::class, 'update'])->name('cards.update');
-        Route::delete('cards/{card}', [CardController::class, 'destroy'])->name('cards.destroy');
+        Route::get('cards/{id}', [CardController::class, 'show'])->name('cards.show');
+        Route::get('cards/{id}/edit', [CardController::class, 'edit'])->name('cards.edit');
+        Route::put('cards/{id}', [CardController::class, 'update'])->name('cards.update');
+        Route::delete('cards/{id}', [CardController::class, 'destroy'])->name('cards.destroy');
 
         Route::get('ordersMaster', [OrderAdminController::class, 'index'])->name('ordersMaster.index');
         Route::get('ordersMaster/create', [OrderAdminController::class, 'create'])->name('ordersMaster.create');
         Route::post('ordersMaster', [OrderAdminController::class, 'store'])->name('ordersMaster.store');
-        Route::get('ordersMaster/{card}', [OrderAdminController::class, 'show'])->name('ordersMaster.show');
-        Route::get('ordersMaster/{card}/edit', [OrderAdminController::class, 'edit'])->name('ordersMaster.edit');
-        Route::put('ordordersMasterers/{card}', [OrderAdminController::class, 'update'])->name('ordersMaster.update');
-        Route::delete('ordersMaster/{card}', [OrderAdminController::class, 'destroy'])->name('ordersMaster.destroy');
+        Route::get('ordersMaster/{id}', [OrderAdminController::class, 'show'])->name('ordersMaster.show');
+        Route::get('ordersMaster/{id}/edit', [OrderAdminController::class, 'edit'])->name('ordersMaster.edit');
+        Route::put('ordordersMasterers/{id}', [OrderAdminController::class, 'update'])->name('ordersMaster.update');
+        Route::delete('ordersMaster/{id}', [OrderAdminController::class, 'destroy'])->name('ordersMaster.destroy');
 });
 
 // routes/web.php
