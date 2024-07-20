@@ -4,8 +4,13 @@
 
 @section('content')
     <div class="card">
-        <h1>Thêm mới thẻ</h1>
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+              <h4 class="text-white text-capitalize ps-3">THÊM MỚI THẺ</h4>
+            </div>
+          </div>
         <div>
+        <div class="mt-3">
             <form action="{{ route('cards.store') }}" method="post">
                 @csrf
                 <div class="input-group input-group-static mb-4">

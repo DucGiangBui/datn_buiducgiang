@@ -2,15 +2,13 @@
 @section('title', 'Cập nhật người dùng ' . $user->name)
 @section('content')
 <div class="card">
-    <h1>Cập nhật người dùng</h1>
-
-    @if (Session::has('message'))
-    <div class="alert alert-success text-black">
-        {{ Session::get('message') }}
-    </div>
-    @endif
-
+    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+          <h4 class="text-white text-capitalize ps-3">CẬP NHẬT NGƯỜI DÙNG</h4>
+        </div>
+      </div>
     <div>
+    <div class="mt-3">
         <form action="{{ route('users.update', $user->user_id) }}" method="POST">
             @csrf
             @method('PUT')

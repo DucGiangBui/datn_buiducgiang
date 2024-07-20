@@ -2,8 +2,13 @@
 @section('title', 'Cập nhật vai trò ' .$role->name)
 @section('content')
 <div class="card">
-    <h1>Cập nhật vai trò</h1>
+    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+          <h4 class="text-white text-capitalize ps-3">CHỈNH SỬA VAI TRÒ</h4>
+        </div>
+      </div>
     <div>
+    <div class="mt-3">
         <form action="{{ route('roles.update', $role->role_id) }}" method="POST">
             @csrf
             @method('PUT')
@@ -21,18 +26,6 @@
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
-            {{-- <div class="input-group input-group-static mb-4">
-                <label name="group" class="ms-0">Nhóm</label>
-                <select name="group" class="form-control" value="{{ $role->group }}">
-                    <option value="system" {{ $role->group == 'system' ? 'selected' : '' }}>System</option>
-                    <option value="user" {{ $role->group == 'user' ? 'selected' : '' }}>User</option>
-                    <option value="card" {{ $role->group == 'card' ? 'selected' : '' }}>Card</option>
-                    <option value="order" {{ $role->group == 'order' ? 'selected' : '' }}>Order</option>
-                </select>
-                @error('group')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div> --}}
             <button type="submit" class="btn btn-submit btn-success">Cập nhật</button>
         </form>
     </div>
