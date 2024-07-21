@@ -22,7 +22,7 @@
         @if ($user && $user->socialInfos->isNotEmpty())
             @foreach ($user->socialInfos as $socialInfo)
                 <div class="social-link">
-                    <a href="{{ $socialInfo->social_url }}" class="icon-button btn-link" target="_blank">
+                    <a href="{{$socialInfo->pivot->social_url}}" class="icon-button btn-link" target="_blank">
                         <span class="icon">
                             <img src="{{ asset($socialInfo->social_icon) }}" alt="{{ $socialInfo->platform }} Icon">
                         </span>

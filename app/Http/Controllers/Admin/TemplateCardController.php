@@ -10,7 +10,7 @@ class TemplateCardController extends Controller
 {
     public function index()
     {
-        $templates = TemplateCard::latest('template_id')->paginate(5); // Hoặc phương thức lấy dữ liệu khác nếu cần
+        $templates = TemplateCard::where('template_id', '!=', 0)->paginate(10);
         return view('admin.templateCards.index', compact('templates'));
     }
 
@@ -31,31 +31,31 @@ class TemplateCardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-{
-    if ($request->hasFile('front') && $request->hasFile('behind')) {
-        $fileFront = $request->file('front');
-        $fileNameFront = time() . '_' . $fileFront->getClientOriginalName();
-        $fileFront->move(public_path('client/assets/imgs/template_cards/front'), $fileNameFront);
+    {
+        if ($request->hasFile('front') && $request->hasFile('behind')) {
+            $fileFront = $request->file('front');
+            $fileNameFront = time() . '_' . $fileFront->getClientOriginalName();
+            $fileFront->move(public_path('client/assets/imgs/template_cards/front'), $fileNameFront);
 
-        $fileBack = $request->file('behind');
-        $fileNameBack = time() . '_' . $fileBack->getClientOriginalName();
-        $fileBack->move(public_path('client/assets/imgs/template_cards/behind'), $fileNameBack);
+            $fileBack = $request->file('behind');
+            $fileNameBack = time() . '_' . $fileBack->getClientOriginalName();
+            $fileBack->move(public_path('client/assets/imgs/template_cards/behind'), $fileNameBack);
 
-        TemplateCard::create([
-            'template_id' => $request->template_id,
-            'front' => 'client/assets/imgs/template_cards/front/' . $fileNameFront,
-            'behind' => 'client/assets/imgs/template_cards/behind/' . $fileNameBack,
-            'description' => $request->description,
-            'cost' => $request->cost,
-        ]);
+            TemplateCard::create([
+                'template_id' => $request->template_id,
+                'front' => 'client/assets/imgs/template_cards/front/' . $fileNameFront,
+                'behind' => 'client/assets/imgs/template_cards/behind/' . $fileNameBack,
+                'description' => $request->description,
+                'cost' => $request->cost,
+            ]);
 
-        return redirect()->route('templateCards.index')
-                         ->with('message', 'Thêm thành công mẫu thẻ!');
-    } else {
-        return redirect()->route('templateCards.index')
-                         ->with('error', 'Vui lòng tải lên cả hai mặt của thẻ.');
+            return redirect()->route('templateCards.index')
+                            ->with('message', 'Thêm thành công mẫu thẻ!');
+        } else {
+            return redirect()->route('templateCards.index')
+                            ->with('alert', 'Vui lòng tải lên cả hai mặt của thẻ.');
+        }
     }
-}
 
 
     public function edit($id)
@@ -74,15 +74,15 @@ class TemplateCardController extends Controller
                 if (is_writable($oldFrontPath)) {
                     if (!unlink($oldFrontPath)) {
                         return redirect()->route('templateCards.index')
-                                        ->with('message', 'Không thể xóa ảnh mặt trước cũ.');
+                                        ->with('alert', 'Không thể xóa ảnh mặt trước cũ.');
                     }
                 } else {
                     return redirect()->route('templateCards.index')
-                                    ->with('message', 'Ảnh mặt trước cũ không có quyền ghi.');
+                                    ->with('alert', 'Ảnh mặt trước cũ không có quyền ghi.');
                 }
             } else {
                 return redirect()->route('templateCards.index')
-                                ->with('message', 'Ảnh mặt trước cũ không tồn tại.');
+                                ->with('mesalertsage', 'Ảnh mặt trước cũ không tồn tại.');
             }
             $fileFront = $request->file('front');
             $fileNameFront = time() . '_' . $fileFront->getClientOriginalName();
@@ -117,7 +117,7 @@ class TemplateCardController extends Controller
         $templates->save();
 
         return redirect()->route('templateCards.index')
-                        ->with('message', 'Cập nhật thành công!');
+                        ->with('message', 'Cập nhật mẫu thẻ thành công!');
     }
 
     public function destroy($id)
@@ -135,6 +135,6 @@ class TemplateCardController extends Controller
         $templates->delete();
 
         return redirect()->route('templateCards.index')
-                        ->with('message', 'Xoá thành công.!');
+                        ->with('alert', 'Xoá mẫu thẻ thành công.!');
         }
 }

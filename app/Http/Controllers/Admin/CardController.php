@@ -17,7 +17,7 @@ class CardController extends Controller
      */
     public function index()
     {
-        $cards = Card::with('templateCard')->paginate(5);
+        $cards = Card::with('templateCard')->paginate(7);
         return view('admin.cards.index', compact('cards'));
     }
     public function handleCardInfo($cardUrl)
@@ -59,7 +59,7 @@ class CardController extends Controller
             return redirect()->route('cards.index')->with('message', 'Thêm mới thẻ thành công!');
         }
 
-        return back()->withErrors(['message' => 'Thêm thẻ thất bại!'])->withInput();
+        return back()->withErrors(['alert' => 'Thêm thẻ thất bại!'])->withInput();
     }
 
 
@@ -120,8 +120,8 @@ class CardController extends Controller
             $card = Card::findOrFail($id);
             $card->delete();
             if($card){
-                return redirect()->route('cards.index')->with('message', 'Xóa thẻ thành công!');
+                return redirect()->route('cards.index')->with('alert', 'Xóa thẻ thành công!');
             }
-            return back()->withErrors(['message' => 'Xóa thẻ không thành công!']);
+            return back()->withErrors(['alert' => 'Xóa thẻ không thành công!']);
         }
 }

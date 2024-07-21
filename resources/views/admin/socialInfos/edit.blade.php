@@ -12,13 +12,10 @@
                 enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class="input-group input-group-static mb-4">
-                    <label for="social_id">Social ID</label>
-                    <input type="text" name="social_id" id="social_id" class="form-control"
+                <input  type="hidden" name="social_id" id="social_id" class="form-control"
                         value="{{ $socialInfo->social_id }}">
-                </div>
                 <div class="input-group input-group-static mb-4">
-                    <label for="platform">Platform</label>
+                    <label for="platform">Nền tảng</label>
                     <input type="text" name="platform" id="platform" class="form-control"
                         value="{{ $socialInfo->platform }}">
                 </div>

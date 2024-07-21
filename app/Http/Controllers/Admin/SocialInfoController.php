@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\SocialInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 
 class SocialInfoController extends Controller
 {
     public function index()
     {
-        $socialInfos = SocialInfo::all();
+        $socialInfos = SocialInfo::oldest('social_id')->paginate(10);
         return view('admin.socialInfos.index', compact('socialInfos'));
     }
 
@@ -31,8 +32,8 @@ class SocialInfoController extends Controller
             'platform' => $request->platform,
             'social_icon' => 'client/assets/imgs/icon_social/' . $fileName,
         ]);
-        return redirect()->route('socialInfos.index')
-                         ->with('message', 'Thêm thành công Icon.!');
+        Session::flash('message', 'Thêm Icon thành công!');
+        return redirect()->route('socialInfos.index');
     }
 
     public function edit($id)
@@ -62,8 +63,8 @@ class SocialInfoController extends Controller
         $socialInfo->platform = $request->platform;
         $socialInfo->save();
 
-        return redirect()->route('socialInfos.index')
-                         ->with('message', 'Cập nhật thành công.!');
+        Session::flash('message', 'Cập nhật Icon thành công!');
+        return redirect()->route('socialInfos.index');
     }
 
     public function destroy($id)
@@ -78,7 +79,7 @@ class SocialInfoController extends Controller
 
         $socialInfo->delete();
 
-        return redirect()->route('socialInfos.index')
-                        ->with('message', 'Xoá thành công.!');
+        Session::flash('alert', 'Xoá Icon thành công!');
+        return redirect()->route('socialInfos.index');
         }
 }

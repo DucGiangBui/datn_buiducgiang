@@ -17,7 +17,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::latest('role_id')->paginate(5);
+        $roles = Role::latest('role_id')->paginate(10);
         return view('admin.roles.index',compact('roles'));
         // return view('admin.roles.index');
     }
@@ -40,7 +40,7 @@ class RoleController extends Controller
      */
     public function store(CreateRoleRequest $request)
     {
-        $dataCreate = $request->only(['card_url', 'template_id']);
+        $dataCreate = $request->all();
         $roles = Role::create($dataCreate);
 
         if ($roles) {
@@ -102,9 +102,9 @@ class RoleController extends Controller
             $role = Role::findOrFail($id);
             $role->delete();
             if($role){
-                return redirect()->route('roles.index')->with('message', 'Xóa vai trò thành công!');
+                return redirect()->route('roles.index')->with('alert', 'Xóa vai trò thành công!');
             }
-            return back()->withErrors(['message' => 'Xóa vai trò không thành công!']);
+            return back()->withErrors(['alert' => 'Xóa vai trò không thành công!']);
     }
 
 }

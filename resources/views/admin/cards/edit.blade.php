@@ -1,12 +1,12 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Cập nhật thẻ')
+@section('title', 'Cập nhật card visit')
 
 @section('content')
     <div class="card">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-              <h4 class="text-white text-capitalize ps-3">CHỈNH SỬA THẺ</h4>
+              <h4 class="text-white text-capitalize ps-3">CHỈNH SỬA CARD VISIT</h4>
             </div>
           </div>
         <div>
@@ -15,27 +15,40 @@
                 @csrf
                 @method('PUT') <!-- Thêm dòng này để sử dụng phương thức PUT -->
                 <div class="input-group input-group-static mb-4">
-                    <label for="card_url">Liên kết</label>
+                    <label for="card_url">Tên miền</label>
                     <input name="card_url" type="text" class="form-control" value="{{ old('card_url', $cards->card_url) }}">
                     @error('card_url')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="input-group input-group-static mb-4">
-                    <label for="template_id">Mẫu thẻ</label>
-                    <select name="template_id" class="form-control" id="template_id" style="height:44px">
-                        <option value="">Chọn mẫu thẻ</option>
-                        @foreach($templateCards as $templateCard)
-                            <option value="{{ $templateCard->template_id }}"
-                                data-image="{{ asset($templateCard->front) }}"
-                                {{ $templateCard->template_id == $cards->template_id ? 'selected' : '' }}>
-                                {{ $templateCard->description }}
+                <div class="form-group">
+                    <label for="template">Mẫu thẻ</label>
+                    <select name="template_id" id="template" class="form-control">
+                        @foreach ($templateCards as $template)
+                            <option value="{{ $template->template_id }}" data-image="{{ asset($template->front) }}"
+                                {{ $template->template_id == $cards->template_id ? 'selected' : '' }}>
+                                {{ $template->description }}
                             </option>
                         @endforeach
                     </select>
-                    @error('template_id')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    @if ($cards->templateCard)
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="name">Mặt trước</label>
+                                <div class="input-group input-group-static mb-4">
+                                    <img src="{{ asset($cards->templateCard->front) }}" alt="Front Template"
+                                        style="width: 70%; height: auto;">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="name">Mặt sau</label>
+                                <div class="input-group input-group-static mb-4">
+                                    <img src="{{ asset($cards->templateCard->behind) }}" alt="Back Template"
+                                        style="width: 70%; height: auto;">
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <button type="submit" class="btn btn-submit btn-success">Cập nhật thẻ</button>
             </form>
