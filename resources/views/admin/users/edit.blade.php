@@ -58,4 +58,5 @@
         </form>
     </div>
 </div>
+@include('admin.layouts.noti')
 @endsection

@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Users\CreateUserRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+
 
 class UserController extends Controller
 {
@@ -19,7 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('role')->latest('user_id')->paginate(5);
+        $users = User::with('role')->latest('user_id')->paginate(10);
         return view('admin.users.index', compact('users'));
     }
 
@@ -55,9 +57,9 @@ class UserController extends Controller
 
 
         if ($user) {
-            return to_route('users.index')->with(['message' => 'Thêm mới vai trò thành công!']);
+            return to_route('users.index')->with(['message' => 'Thêm mới người dùng thành công!']);
         }
-        return back()->withErrors(['message' => 'Them vai trò thất bại!']);
+        return back()->withErrors(['message' => 'Thêm người dùng thất bại!']);
     }
 
     /**
@@ -96,9 +98,11 @@ class UserController extends Controller
         $user = User::findOrFail($user_id);
         $user->update($request->only(['name', 'email', 'gender', 'role_id']));
         if ($user) {
-            return to_route('users.index')->with(['message' => 'Cập nhật người dùng thành công!']);
+            Session::flash('message', 'Cập nhật người dùng thành công!');
+            return to_route('users.index');
         }
-        return back()->withErrors(['message' => 'Cập nhật người dùng thất bại!']);
+        Session::flash('alert', 'Cập nhật người không thành công!');
+        return back();
     }
 
     /**
@@ -112,6 +116,8 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('users.index')->with(['message' => 'Xoá người dùng thành công!']);
+
+        Session::flash('alert', 'Xoá người dùng thành công!');
+        return redirect()->route('users.index');
     }
 }

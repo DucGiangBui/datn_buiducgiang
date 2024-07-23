@@ -18,6 +18,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -78,8 +79,6 @@
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                         @if (auth()->check())
                             <div class="input-group input-group-outline">
-                                <label class="form-label">Type here...</label>
-                                <input type="text" class="form-control">
                             </div>
                         @endif
                     </div>
@@ -97,8 +96,9 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
+
                                 <a id="navbarDropdown" class="nav-link fw-600" href="#">
-                                    {{ Auth::user()->name }}
+                                    <i class="fa-solid fa-user" style="padding-right: 10px"></i>{{ Auth::user()->name }}
                                 </a>
                             </li>
                         @endguest
@@ -551,14 +551,9 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
     </script>
-    <!-- Github buttons -->
+
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example Trang chủ etc -->
-    <script src="{{ asset('admin/assets/js/material-dashboard.min.js?v=3.1.0') }}"></script><!-- Bootstrap Bundle with Popper -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-
-
-
+    <script src="{{ asset('admin/assets/js/material-dashboard.min.js?v=3.1.0') }}"></script>
 </body>
 
 </html>

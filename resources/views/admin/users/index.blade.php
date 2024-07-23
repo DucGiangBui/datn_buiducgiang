@@ -4,15 +4,11 @@
     <div class="card">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-              <h4 class="text-white text-capitalize ps-3">DANH SÁCH NGƯỜI DÙNG</h4>
+                <h4 class="text-white text-capitalize ps-3">DANH SÁCH NGƯỜI DÙNG</h4>
             </div>
-          </div>
+        </div>
+        @include('admin.layouts.noti')
         <div>
-        @if (Session::has('message'))
-            <div class="alert alert-success text-black mt-3">
-                {{ Session::get('message') }}
-            </div>
-        @endif
             <a href="{{ route('users.create') }}" class="btn btn-primary mt-3">Thêm mới</a>
         </div>
         <div>
@@ -45,11 +41,9 @@
                             <a href="{{ route('users.edit', $user->user_id) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>
                         <td>
-                            <form action="{{ route('users.destroy', $user->user_id) }}" method="POST">
-                                @csrf
-                                @method('delete')
-                                <button class="bd-none" onclick="confirmDelete()"><i class="fa-solid fa-trash"></i></button>
-                            </form>
+                            <button class="bd-none"
+                                onclick="confirmDelete('{{ route('users.destroy', $user->user_id) }}')"><i
+                                    class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 @endforeach
@@ -58,11 +52,5 @@
         </div>
     </div>
 
-    <script>
-        function confirmDelete() {
-            if (confirm('Bạn có chắc chắn muốn xóa người dùng này không?')) {
-                document.getElementById('delete-role-form').submit();
-            }
-        }
-    </script>
+    @include('admin.layouts.modal')
 @endsection

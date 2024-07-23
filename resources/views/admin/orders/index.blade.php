@@ -7,13 +7,8 @@
                 <h4 class="text-white text-capitalize ps-3">DANH SÁCH ĐƠN HÀNG</h4>
             </div>
         </div>
+        @include('admin.layouts.noti')
         <div>
-            @if (Session::has('message'))
-                <div class="alert alert-success text-black mt-3">
-                    {{ Session::get('message') }}
-                </div>
-            @endif
-
             <div>
                 <a href="{{ route('ordersMaster.create') }}" class="btn btn-primary mt-3">Thêm mới</a>
             </div>
@@ -42,18 +37,17 @@
                             <td>{{ $order->orderInfo->name }}</td>
                             <td>{{ $order->orderInfo->phone }}</td>
                             <td>{{ $order->orderInfo->address }}</td>
-                            <td class="status-{{ $order->status }}">{{ $statusMap[$order->status] ?? 'Không xác định' }}</td>
+                            <td class="status-{{ $order->status }}">{{ $statusMap[$order->status] ?? 'Không xác định' }}
+                            </td>
                             <td>
                                 <a href="{{ route('ordersMaster.edit', $order->order_id) }}"><i
                                         class="fa-solid fa-pen-to-square"></i></a>
                             </td>
                             <td>
-                                <form action="{{ route('ordersMaster.destroy', $order->order_id) }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="bd-none" onclick="confirmDelete()"><i
-                                            class="fa-solid fa-trash"></i></button>
-                                </form>
+                                <button class="bd-none"
+                                    onclick="confirmDelete('{{ route('ordersMaster.destroy', $order->order_id) }}')"><i
+                                        class="fa-solid fa-trash"></i>
+                                </button>
                             </td>
                         </tr>
                     @endforeach
@@ -63,11 +57,5 @@
         </div>
     </div>
 
-    <script>
-        function confirmDelete() {
-            if (confirm('Bạn có chắc chắn muốn xóa đơn hàng này không?')) {
-                document.getElementById('delete-role-form').submit();
-            }
-        }
-    </script>
+    @include('admin.layouts.modal')
 @endsection

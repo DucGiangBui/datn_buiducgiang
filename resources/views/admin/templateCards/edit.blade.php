@@ -12,17 +12,25 @@
                 enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class="form-group">
-                    <label for="front" class="form-label">Mặt trước</label>
-                    <input type="file" name="front" id="front" class="form-control form-control-sm">
-                    <img src="{{ asset($templates->front) }}" alt="icon" width="50" class="mt-2">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="name">Mặt trước</label>
+                        <input type="file" name="front" id="front" class="form-control form-control-sm">
+                        <div class="input-group input-group-static mb-4">
+                            <img src="{{ asset($templates->front) }}" alt="Front Template" style="width: 70%; height: auto;"
+                                class="mt-3">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="name">Mặt sau</label>
+                        <input type="file" name="behind" id="behind" class="form-control form-control-sm">
+                        <div class="input-group input-group-static mb-4">
+                            <img src="{{ asset($templates->behind) }}" alt="Back Template" style="width: 70%; height: auto;"
+                                class="mt-3">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="behind" class="form-label">Mặt sau</label>
-                    <input type="file" name="behind" id="behind" class="form-control form-control-sm">
-                    <img src="{{ asset($templates->behind) }}" alt="icon" width="50" class="mt-2">
-                </div>
-                <div class="input-group input-group-static mb-4 mt-3">
+                <div class="input-group input-group-static mb-4">
                     <label for="platform">Mô tả</label>
                     <input type="text" name="description" id="description" class="form-control"
                         value="{{ $templates->description }}">
@@ -35,5 +43,5 @@
             </form>
 
         </div>
-
+        @include('admin.layouts.noti')
     @endsection

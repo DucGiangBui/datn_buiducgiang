@@ -4,55 +4,45 @@
     <div class="card">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-              <h4 class="text-white text-capitalize ps-3 ">DANH SÁCH ICON MẠNG XÃ HỘI</h4>
+                <h4 class="text-white text-capitalize ps-3 ">DANH SÁCH ICON MẠNG XÃ HỘI</h4>
             </div>
-          </div>
-        <div>
-        @if (Session::has('message'))
-            <div class="alert alert-success text-black">
-                {{ Session::get('message') }}
-            </div>
-        @endif
-
-        <div>
-            <a href="{{ route('socialInfos.create') }}" class="btn btn-primary mt-3">Thêm mới</a>
         </div>
+        @include('admin.layouts.noti')
         <div>
-            <table class="table table-hover">
-                <tr>
-                    <th>#</th>
-                    <th>Nền tảng</th>
-                    <th>Icon</th>
-                    <th>Chỉnh sửa</th>
-                    <th>Xoá</th>
-                </tr>
-                @foreach ($socialInfos as $socialInfo)
+            <div>
+                <a href="{{ route('socialInfos.create') }}" class="btn btn-primary mt-3">Thêm mới</a>
+            </div>
+            <div>
+                <table class="table table-hover">
                     <tr>
-                        <td>{{ $socialInfo->social_id }}</td>
-                        <td>{{ $socialInfo->platform }}</td>
-                        <td><img style="width: 30px;" src="{{ asset($socialInfo->social_icon) }}" alt="icon" width="50"></td>
+                        <th>#</th>
+                        <th>Nền tảng</th>
+                        <th>Icon</th>
+                        <th>Chỉnh sửa</th>
+                        <th>Xoá</th>
+                    </tr>
+                    @foreach ($socialInfos as $socialInfo)
+                        <tr>
+                            <td>{{ $socialInfo->social_id }}</td>
+                            <td>{{ $socialInfo->platform }}</td>
+                            <td><img style="width: 30px;" src="{{ asset($socialInfo->social_icon) }}" alt="icon"
+                                    width="50"></td>
 
-                        <td>
-                            <a href="{{ route('socialInfos.edit', $socialInfo->social_id) }}"><i
-                                    class="fa-solid fa-pen-to-square"></i></a>
-                        </td>
-                        <td>
-                            <form action="{{ route('socialInfos.destroy', $socialInfo->social_id) }}" method="POST">
-                                @csrf
-                                @method('delete')
-                                <button class="bd-none" onclick="confirmDelete()"><i class="fa-solid fa-trash"></i></button>
-                            </form>
-                        </td>
-                @endforeach
-            </table>
+                            <td>
+                                <a href="{{ route('socialInfos.edit', $socialInfo->social_id) }}"><i
+                                        class="fa-solid fa-pen-to-square"></i></a>
+                            </td>
+                            <td>
+                                <button class="bd-none"
+                                    onclick="confirmDelete('{{ route('socialInfos.destroy', $socialInfo->social_id) }}')"><i
+                                        class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
+                    @endforeach
+                </table>
+                {{ $socialInfos->links() }}
+            </div>
         </div>
-    </div>
 
-    <script>
-        function confirmDelete() {
-            if (confirm('Bạn có chắc chắn muốn xóa người dùng này không?')) {
-                document.getElementById('delete-role-form').submit();
-            }
-        }
-    </script>
-@endsection
+        @include('admin.layouts.modal')
+    @endsection
