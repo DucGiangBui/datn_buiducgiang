@@ -35,6 +35,10 @@
                 @endif
             </div>
             @endif
+            <div class="info-item" style="margin-bottom: 20px">
+                <img src="{{ $qrCodeUrl }}" alt="QR Code">
+            </div>
+
             <form action="{{ route('profile.updateUrl') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="input-group input-card-info">

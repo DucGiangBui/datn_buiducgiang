@@ -16,7 +16,9 @@ class ClientController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('client.profiles.index', compact('user'));
+        $cards =$user->card;
+
+        return view('client.profiles.index', compact('user','qrCodeUrl'));
     }
 
     public function show()
@@ -29,9 +31,11 @@ class ClientController extends Controller
         $user = auth()->user();
         $userInfo = UserInfo::where('user_id', $user->user_id)->first();
         $card = Card::where('card_id', $user->card_id)->first();
+        $text = 'http://onetap.io.vn/card-info/'.$card->card_url;
         $template = TemplateCard::where('template_id', $card->template_id)->first();
+        $qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' . urlencode($text);
 
-        return view('client.profiles.card', compact('user', 'template'));
+        return view('client.profiles.card', compact('user', 'template','qrCodeUrl'));
     }
 
     public function updateUrl(Request $request)

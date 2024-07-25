@@ -1526,7 +1526,7 @@ hr {
 }
 .card-info-item {
     margin: 20px;
-    width:50%
+    width: 50%;
 }
 .card-info-card {
     display: flex;
@@ -1538,4 +1538,58 @@ hr {
 
 .card-info-img {
     width: 100%;
+}
+
+@media screen and (max-width: 1281px) {
+    .w-1440px {
+        max-width: 100%;
+    }
+    .social-link {
+        width: 50%;
+    }
+    .info-item{
+
+    }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1280px) {
+    .w-1440px {
+        max-width: 100%;
+    }
+    .social-link {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .w-1440px {
+        max-width: 100%;
+    }
+    .social-link {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .w-1440px {
+        max-width: 100%;
+    }
+    .social-link {
+        width: 70%;
+    }
+    .info-item{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .w-1440px {
+        max-width: 100%;
+    }
+    .social-link {
+        width: 90%;
+    }
+    .info-item{
+        width: 90%;
+    }
 }
